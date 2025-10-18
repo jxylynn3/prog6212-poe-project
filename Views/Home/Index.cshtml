@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>@ViewData["Title"]</title>
+   <style>
+body {
+            background-image: url("/images/Campus Leisure Time.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .main-heading {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: 2.5px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255);
+        }
+
+        .sub-heading-1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 6px rgba(255, 255, 255);
+        }
+
+        .sub-heading-2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-top: 10px;
+            opacity: 0.95;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255);
+        }
+
+        @@media (max-width: 768px) {
+            .main-heading
+
+        {
+            font-size: 1.8rem;
+        }
+
+        .sub-heading-1 {
+            font-size: 2.5rem;
+        }
+
+        .sub-heading-2 {
+            font-size: 1.5rem;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="main-heading">Welcome to</h1>
+        <h2 class="sub-heading-1">ABC University</h2>
+        <h3 class="sub-heading-2">CMC System</h3>
+    </div>
+</body>
+</html>
