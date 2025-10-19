@@ -9,9 +9,9 @@ namespace ST10448420_CMCsystem.Data
         public AppDBContext(DbContextOptions<AppDBContext> options)
            : base(options) { }
 
-        public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<ProgrammeCoordinator> ProgrammeCoordinators { get; set; }
-        public DbSet<AcademicManager> AcademicManagers { get; set; }
+        public DbSet<Lecturer> Lecturer { get; set; }
+        public DbSet<ProgrammeCoordinator> ProgrammeCoordinator { get; set; }
+        public DbSet<AcademicManager> AcademicManager { get; set; }
         public DbSet<Claims> Claims { get; set; }
         public DbSet<SupportingDocx> SupportingDocuments { get; set; }
         public DbSet<Approval> Approvals { get; set; }

@@ -23,5 +23,8 @@ namespace ST10448420_CMCsystem.Models
         public string FilePath { get; set; }
 
         public DateTime UploadedDate { get; set; } = DateTime.Now;
+
+        [StringLength(255)]
+        public string AdditionalNotes { get; set; }
     }
 }

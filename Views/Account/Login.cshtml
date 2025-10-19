@@ -3,7 +3,13 @@
 }
 <h2>Login</h2>
 
+@if (TempData["RegisterSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["RegisterSuccess"]</div>
+}
+
 <form asp-action="Login" method="post">
+    @Html.AntiForgeryToken()
     <div>
         <label>Username</label>
         <input name="username" class="form-control" />

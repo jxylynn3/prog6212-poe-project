@@ -21,58 +21,97 @@ namespace ST10448420_CMCsystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(UserAccountViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // simple password length check (no regex)
+            if (string.IsNullOrWhiteSpace(model.Password) || model.Password.Length < 8)
             {
-                switch (model.Role)
-                {
-                    case "Lecturer":
-                        var lecturer = new Lecturer
-                        {
-                            LecturerID = Guid.NewGuid().ToString().Substring(0, 10),
-                            FirstName = model.FirstName,
-                            LastName = model.LastName,
-                            Email = model.Email,
-                            Username = model.Username,
-                            Password = model.Password
-                        };
-                        _db.Lecturers.Add(lecturer);
-                        break;
-
-                    case "AcademicManager":
-                        var manager = new AcademicManager
-                        {
-                            AcademicManagerID = Guid.NewGuid().ToString().Substring(0, 10),
-                            FirstName = model.FirstName,
-                            LastName = model.LastName,
-                            Email = model.Email,
-                            Username = model.Username,
-                            Password = model.Password
-                        };
-                        _db.AcademicManagers.Add(manager);
-                        break;
-
-                    case "ProgrammeCoordinator":
-                        var coordinator = new ProgrammeCoordinator
-                        {
-                            CoordinatorID = Guid.NewGuid().ToString().Substring(0, 10),
-                            FirstName = model.FirstName,
-                            LastName = model.LastName,
-                            Email = model.Email,
-                            Username = model.Username,
-                            Password = model.Password
-                        };
-                        _db.ProgrammeCoordinators.Add(coordinator);
-                        break;
-                }
-
-                _db.SaveChanges();
-                ViewBag.Message = "Registration successful!";
-                return RedirectToAction("Login");
+                ModelState.AddModelError("Password", "Password must be at least 8 characters.");
+                return View(model);
             }
 
-            return View(model);
+            // Check duplicates across tables (username and email)
+            bool usernameExists = _db.Lecturer.Any(x => x.Username == model.Username)
+                               || _db.AcademicManager.Any(x => x.Username == model.Username)
+                               || _db.ProgrammeCoordinator.Any(x => x.Username == model.Username);
+
+            if (usernameExists)
+            {
+                ModelState.AddModelError("Username", "Username already taken.");
+                return View(model);
+            }
+
+            bool emailExists = _db.Lecturer.Any(x => x.Email == model.Email)
+                            || _db.AcademicManager.Any(x => x.Email == model.Email)
+                            || _db.ProgrammeCoordinator.Any(x => x.Email == model.Email);
+
+            if (emailExists)
+            {
+                ModelState.AddModelError("Email", "Email already in use.");
+                return View(model);
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Role))
+            {
+                ModelState.AddModelError("Role", "Please select a role.");
+                return View(model);
+            }
+
+            switch (model.Role)
+            {
+                case "Lecturer":
+                    var lecturer = new Lecturer
+                    {
+                        LecturerID = Guid.NewGuid().ToString().Substring(0, 10),
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        Username = model.Username,
+                        Password = model.Password
+                    };
+                    _db.Lecturer.Add(lecturer);
+                    break;
+
+                case "AcademicManager":
+                    var manager = new AcademicManager
+                    {
+                        AcademicManagerID = Guid.NewGuid().ToString().Substring(0, 10),
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        Username = model.Username,
+                        Password = model.Password
+                    };
+                    _db.AcademicManager.Add(manager);
+                    break;
+
+                case "ProgrammeCoordinator":
+                    var coordinator = new ProgrammeCoordinator
+                    {
+                        CoordinatorID = Guid.NewGuid().ToString().Substring(0, 10),
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        Username = model.Username,
+                        Password = model.Password
+                    };
+                    _db.ProgrammeCoordinator.Add(coordinator);
+                    break;
+
+                default:
+                    ModelState.AddModelError("Role", "Unknown role.");
+                    return View(model);
+            }
+
+            _db.SaveChanges();
+
+            // Provide a friendly success message (optional) and redirect to Login
+            TempData["RegisterSuccess"] = "Registration successful. Please log in.";
+            return RedirectToAction("Login");
         }
 
 
@@ -83,26 +122,37 @@ namespace ST10448420_CMCsystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(string username, string password, string role)
         {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(role))
+            {
+                ViewBag.Error = "Please provide username, password and role.";
+                return View();
+            }
+
             bool isValid = false;
 
             switch (role)
             {
                 case "Lecturer":
-                    isValid = _db.Lecturers.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("LecturerDashboard", "Dashboard");
+                    isValid = _db.Lecturer.Any(x => x.Username == username && x.Password == password);
+                    if (isValid) return RedirectToAction("LecturerDashboard", "Dashboard", new { username = username });
                     break;
 
                 case "AcademicManager":
-                    isValid = _db.AcademicManagers.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("AcademicManagerDashboard", "Dashboard");
+                    isValid = _db.AcademicManager.Any(x => x.Username == username && x.Password == password);
+                    if (isValid) return RedirectToAction("AcademicManagerDashboard", "Dashboard", new { username = username });
                     break;
 
                 case "ProgrammeCoordinator":
-                    isValid = _db.ProgrammeCoordinators.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("ProgrammeCoordinatorDashboard", "Dashboard");
+                    isValid = _db.ProgrammeCoordinator.Any(x => x.Username == username && x.Password == password);
+                    if (isValid) return RedirectToAction("ProgrammeCoordinatorDashboard", "Dashboard", new { username = username });
                     break;
+
+                default:
+                    ViewBag.Error = "Unknown role.";
+                    return View();
             }
 
             ViewBag.Error = "Invalid username, password, or role.";
