@@ -55,7 +55,7 @@ namespace ST10448420_CMCsystem.Migrations
 
                     b.HasKey("AcademicManagerID");
 
-                    b.ToTable("AcademicManagers");
+                    b.ToTable("AcademicManager");
                 });
 
             modelBuilder.Entity("ST10448420_CMCsystem.Models.Approval", b =>
@@ -145,7 +145,7 @@ namespace ST10448420_CMCsystem.Migrations
 
                     b.HasIndex("LecturerID");
 
-                    b.ToTable("Claims");
+                    b.ToTable("Claim");
                 });
 
             modelBuilder.Entity("ST10448420_CMCsystem.Models.Lecturer", b =>
@@ -181,7 +181,7 @@ namespace ST10448420_CMCsystem.Migrations
 
                     b.HasKey("LecturerID");
 
-                    b.ToTable("Lecturers");
+                    b.ToTable("Lecturer");
                 });
 
             modelBuilder.Entity("ST10448420_CMCsystem.Models.ProgrammeCoordinator", b =>
@@ -217,7 +217,7 @@ namespace ST10448420_CMCsystem.Migrations
 
                     b.HasKey("CoordinatorID");
 
-                    b.ToTable("ProgrammeCoordinators");
+                    b.ToTable("ProgrammeCoordinator");
                 });
 
             modelBuilder.Entity("ST10448420_CMCsystem.Models.SupportingDocx", b =>

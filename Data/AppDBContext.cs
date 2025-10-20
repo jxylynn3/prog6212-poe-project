@@ -15,5 +15,8 @@ namespace ST10448420_CMCsystem.Data
         public DbSet<Claims> Claims { get; set; }
         public DbSet<SupportingDocx> SupportingDocuments { get; set; }
         public DbSet<Approval> Approvals { get; set; }
+
+ 
+
     }
 }

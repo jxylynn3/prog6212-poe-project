@@ -152,6 +152,7 @@ C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.RazorAssemblyInfo.cache
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.RazorAssemblyInfo.cs
+C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.sourcelink.json
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -169,4 +170,3 @@ C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.pdb
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.genruntimeconfig.cache
 C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ref\ST10448420_CMCsystem.dll
-C:\Users\lab_services_student\source\repos\ST10448420_CMCsystem\obj\Debug\net8.0\ST10448420_CMCsystem.sourcelink.json

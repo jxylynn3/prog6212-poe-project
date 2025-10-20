@@ -5,22 +5,28 @@
 
 <h2>Create Claim</h2>
 
+
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
 
-    <input type="hidden" asp-for="ClaimID" />
-    <input type="hidden" asp-for="LecturerID" />
-
-    <div class="mb-2">
-        <label>Lecturer</label>
-        <input class="form-control" value="@Model.LecturerName" readonly />
+  
+    <div class="form-group">
+        <label>Lecturer ID</label>
+        <input asp-for="LecturerID" class="form-control" readonly />
     </div>
 
-    <div class="mb-2">
-        <label asp-for="ClaimName"></label>
-        <input asp-for="ClaimName" class="form-control" />
-        <span asp-validation-for="ClaimName" class="text-danger"></span>
+    <div class="form-group">
+        <label>Lecturer Name</label>
+        <input asp-for="LecturerName" class="form-control" readonly />
     </div>
+
+
+        <div class="form-group">
+            <label>Claim Name</label>
+            <input asp-for="ClaimName" class="form-control" />
+            <span asp-validation-for="ClaimName" class="text-danger"></span>
+        </div>
 
     <div class="mb-2">
         <label asp-for="ClaimDescription"></label>
@@ -69,13 +75,14 @@
 
     <div class="mt-3">
         <button type="submit" class="btn btn-primary">Submit Claim</button>
-        <a asp-controller="Dashboard" asp-action="LecturerDashboard" asp-route-id="@Model.LecturerID" class="btn btn-light">Cancel</a>
+        <a asp-controller="Dashboard" asp-action="LecturerDashboard" asp-route-lecturerId="@Model.LecturerID" class="btn btn-light">Cancel</a>
     </div>
 </form>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
     <script>
+        let uploadIndex = 0;
+
         document.getElementById('uploadBtn').addEventListener('click', async () => {
             const fileInput = document.getElementById('fileInput');
             if (!fileInput.files.length) { alert('Choose a file first'); return; }
@@ -86,7 +93,6 @@
             form.append('file', file);
 
             try {
-                // POST to UploadDocument
                 const resp = await fetch('@Url.Action("UploadDocument", "Claims")', {
                     method: 'POST',
                     body: form
@@ -98,35 +104,41 @@
                 }
                 const data = await resp.json();
                 if (data.success) {
-                    // show filename in list
                     const list = document.getElementById('uploadedList');
                     const p = document.createElement('p');
                     p.textContent = data.fileName;
                     list.appendChild(p);
 
-                    // add hidden inputs so server knows which documents to link (if needed)
                     const container = document.getElementById('uploadedHiddenInputs');
-                    // store documentId, fileName, filePath as hidden inputs (JSON string)
-                    const hidden = document.createElement('input');
-                    hidden.type = 'hidden';
-                    hidden.name = 'UploadedFiles.Index'; // will be used for binding to a list
-                    hidden.value = Math.random().toString(36).substring(2,9);
-                    container.appendChild(hidden);
 
-                    // actual fields: DocumentID, FileName, FilePath using index mapping
-                    const idx = document.querySelectorAll('#uploadedHiddenInputs input[type="hidden"]').length;
-                    // create inputs expected by model binder (UploadedFiles[{i}].DocumentID etc.)
+                    // index token
+                    const idxToken = document.createElement('input');
+                    idxToken.type = 'hidden';
+                    idxToken.name = 'UploadedFiles.Index';
+                    idxToken.value = uploadIndex;
+                    container.appendChild(idxToken);
+
+                    // actual fields
                     const dId = document.createElement('input');
-                    dId.type = 'hidden'; dId.name = `UploadedFiles[${idx-1}].DocumentID`; dId.value = data.documentId;
+                    dId.type = 'hidden';
+                    dId.name = `UploadedFiles[${uploadIndex}].DocumentID`;
+                    dId.value = data.documentId;
+
                     const fName = document.createElement('input');
-                    fName.type = 'hidden'; fName.name = `UploadedFiles[${idx-1}].FileName`; fName.value = data.fileName;
+                    fName.type = 'hidden';
+                    fName.name = `UploadedFiles[${uploadIndex}].FileName`;
+                    fName.value = data.fileName;
+
                     const fPath = document.createElement('input');
-                    fPath.type = 'hidden'; fPath.name = `UploadedFiles[${idx-1}].FilePath`; fPath.value = data.filePath;
+                    fPath.type = 'hidden';
+                    fPath.name = `UploadedFiles[${uploadIndex}].FilePath`;
+                    fPath.value = data.filePath;
 
                     container.appendChild(dId);
                     container.appendChild(fName);
                     container.appendChild(fPath);
 
+                    uploadIndex++;
                     alert('Upload successful: ' + data.fileName);
                 } else {
                     alert('Upload failed.');
@@ -135,7 +147,6 @@
                 console.error(ex);
                 alert('Upload error: ' + ex.message);
             } finally {
-                // clear file input
                 fileInput.value = '';
             }
         });
@@ -144,4 +155,3 @@
     @* client-side validation scripts *@
     <partial name="_ValidationScriptsPartial" />
 }
-

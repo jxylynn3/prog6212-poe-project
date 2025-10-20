@@ -1,13 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ST10448420_CMCsystem.Data;
 
 namespace ST10448420_CMCsystem.Controllers
 {
     public class DashboardController : Controller
     {
-        [HttpGet]
-        public IActionResult LecturerDashboard(string username)
+        private readonly AppDBContext _db;
+        public DashboardController(AppDBContext db)
         {
-            ViewBag.Username = username; // may be null if user navigates directly
+            _db = db;
+        }
+        [HttpGet]
+        public IActionResult LecturerDashboard(string lecturerId)
+        {
+            // Get lecturerId from TempData if not passed in
+            if (string.IsNullOrEmpty(lecturerId))
+            {
+                lecturerId = TempData["LecturerID"]?.ToString();
+            }
+
+            ViewBag.LecturerID = lecturerId;
+            ViewBag.LecturerName = TempData["LecturerName"]?.ToString();
+
+            // If lecturerId still missing, fallback to default (for testing)
+            if (string.IsNullOrEmpty(lecturerId))
+                lecturerId = "L001"; // <- optional fallback for testing only
+
+            // Fetch recent claims for this lecturer
+            var recentClaims = _db.Claims
+                .Where(c => c.LecturerID == lecturerId)
+                .OrderByDescending(c => c.ClaimDate)
+                .Take(3)
+                .ToList();
+
+            ViewBag.RecentClaims = recentClaims;
+
             return View();
         }
 
@@ -26,3 +53,4 @@ namespace ST10448420_CMCsystem.Controllers
         }
     }
 }
+

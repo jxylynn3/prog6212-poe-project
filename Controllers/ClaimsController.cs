@@ -20,32 +20,63 @@ namespace ST10448420_CMCsystem.Controllers
         [HttpGet]
         public IActionResult Create(string lecturerId)
         {
+            lecturerId ??= TempData["LecturerID"]?.ToString();
+
             var vm = new ClaimCreateViewModel
             {
-                ClaimID = Guid.NewGuid().ToString().Substring(0, 10),
+                //ClaimID = Guid.NewGuid().ToString().Substring(0, 10),
                 LecturerID = lecturerId ?? "",
             };
 
             if (!string.IsNullOrEmpty(lecturerId))
             {
                 var lec = _db.Lecturer.FirstOrDefault(l => l.LecturerID == lecturerId);
-                if (lec != null) vm.LecturerName = $"{lec.FirstName} {lec.LastName}";
+                if (lec != null)
+                {
+                    vm.LecturerName = $"{lec.FirstName} {lec.LastName}";
+                }
             }
 
             return View(vm);
         }
+        // the purpose of this commented-out code is to test routing only,i wasnt done with the complete implementation
+        //public IActionResult Create(string lecturerId)
+        //{
+        //    return Content($"Create action hit with lecturerId={lecturerId}");
+        //}
 
         // POST: submit completed claim
     [HttpPost]
     [ValidateAntiForgeryToken]
         public IActionResult Create(ClaimCreateViewModel vm)
         {
+            if (string.IsNullOrEmpty(vm.ClaimID))
+            {
+                vm.ClaimID = "CLM" + Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+            }
+            ModelState.Remove(nameof(vm.ClaimID));
             if (!ModelState.IsValid)
             {
+                var errors = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                Console.WriteLine("ModelState invalid: " + errors);
                 return View(vm);
             }
 
-            // Map ViewModel → Entity
+            // optional: ensure lecturer exists
+            if (string.IsNullOrEmpty(vm.LecturerID))
+            {
+                vm.LecturerID = TempData["LecturerID"]?.ToString();
+            }
+
+            if (string.IsNullOrEmpty(vm.LecturerName))
+            {
+                var lec = _db.Lecturer.FirstOrDefault(l => l.LecturerID == vm.LecturerID);
+                if (lec != null)
+                {
+                    vm.LecturerName = $"{lec.FirstName} {lec.LastName}";
+                }
+            }
+
             var claim = new Claims
             {
                 ClaimID = vm.ClaimID,
@@ -55,23 +86,23 @@ namespace ST10448420_CMCsystem.Controllers
                 ClaimDate = vm.ClaimDate,
                 TotalHoursWorked = vm.TotalHoursWorked,
                 HourlyRate = vm.HourlyRate,
-                ClaimStatus = vm.ClaimStatus ?? "Pending",
+                ClaimStatus = string.IsNullOrWhiteSpace(vm.ClaimStatus) ? "Pending" : vm.ClaimStatus,
                 ClaimSubmissionDate = DateTime.Now
             };
 
             _db.Claims.Add(claim);
             _db.SaveChanges();
+            Console.WriteLine($"Claim saved: {claim.ClaimID}");// this helps make sure the claim is saved(for me)
 
-            // Add uploaded files
+
+            // persisted uploaded files (added by client as hidden inputs)
             if (vm.UploadedFiles != null && vm.UploadedFiles.Any())
             {
                 foreach (var f in vm.UploadedFiles)
                 {
                     var doc = new SupportingDocx
                     {
-                        DocumentID = string.IsNullOrEmpty(f.DocumentID)
-                            ? Guid.NewGuid().ToString().Substring(0, 10)
-                            : f.DocumentID,
+                        DocumentID = string.IsNullOrEmpty(f.DocumentID) ? Guid.NewGuid().ToString().Substring(0, 10) : f.DocumentID,
                         ClaimID = claim.ClaimID,
                         FileName = f.FileName,
                         FilePath = f.FilePath,
@@ -80,14 +111,14 @@ namespace ST10448420_CMCsystem.Controllers
                     _db.SupportingDocuments.Add(doc);
                 }
                 _db.SaveChanges();
-            }
+                 }
 
-            // Redirect back to dashboard
-            return RedirectToAction("LecturerDashboard", "Dashboard", new { id = vm.LecturerID });
+            return RedirectToAction("List", new { lecturerId = vm.LecturerID });
+            // I redirect to Claims.List so user sees the new claim immediately in My Claims
         }
 
-    // AJAX: upload file and immediately save it to server & return JSON info
-    [HttpPost]
+        // AJAX: upload file and immediately save it to server & return JSON info
+        [HttpPost]
         public async Task<IActionResult> UploadDocument([FromForm] string claimId, [FromForm] IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -101,6 +132,12 @@ namespace ST10448420_CMCsystem.Controllers
 
             if (file.Length > 10 * 1024 * 1024)
                 return BadRequest("File too large.");
+
+            // 🛠 Handle missing claimId gracefully
+            if (string.IsNullOrEmpty(claimId))
+            {
+                claimId = "temp_" + Guid.NewGuid().ToString("N").Substring(0, 6);
+            }
 
             // Directory: wwwroot/uploads/{claimId}
             var uploadsRoot = Path.Combine(_webHost.WebRootPath, "uploads", claimId);
@@ -116,25 +153,37 @@ namespace ST10448420_CMCsystem.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            var doc = new SupportingDocx
-            {
-                DocumentID = Guid.NewGuid().ToString().Substring(0, 10),
-                ClaimID = claimId,
-                FileName = fileName,
-                FilePath = $"/uploads/{claimId}/{uniqueName}",
-                UploadedDate = DateTime.Now
-            };
+            var publicPath = $"/uploads/{claimId}/{uniqueName}";
 
-            _db.SupportingDocuments.Add(doc);
-            _db.SaveChanges();
-
+            // Return file metadata to client
             return Json(new
             {
                 success = true,
-                documentId = doc.DocumentID,
-                fileName = doc.FileName,
-                filePath = doc.FilePath
+                documentId = Guid.NewGuid().ToString().Substring(0, 10),
+                fileName = fileName,
+                filePath = publicPath,
+                claimId = claimId //include this so front-end can store it for later
             });
+        }
+
+
+        // GET: Claims/List?lecturerId=L001
+        public async Task<IActionResult> List(string lecturerId)
+        {
+            if (string.IsNullOrEmpty(lecturerId))
+            {
+                lecturerId = "L001"; // fallback
+            }
+
+            ViewBag.LecturerID = lecturerId;
+
+            var claims = await _db.Claims
+                .Where(c => c.LecturerID == lecturerId)
+                .OrderByDescending(c => c.ClaimDate)
+                .ToListAsync();
+
+            return View(claims);
+
         }
     }
 }

@@ -1,4 +1,57 @@
-﻿<h2>Welcome Lecturer!</h2>
-<p>This is your dashboard </p>
+﻿@{
+    ViewData["Title"] = "Lecturer Dashboard";
+    var lecturerId = ViewBag.LecturerID ?? "L001"; // fallback test ID if not set
+}
 
 
+<div class="container mt-5">
+    <div class="card shadow border-0">
+        <div class="card-body text-center py-5">
+            <h2 class="card-title mb-3">👋 Welcome Lecturer!</h2>
+            <p class="text-muted">Manage your monthly claims and track their approval status here.</p>
+
+            <div class="mt-4 d-flex justify-content-center gap-4">
+                <!--Button that connects to the Create Claim form -->
+                <a asp-controller="Claims"
+                   asp-action="Create"
+                   asp-route-lecturerId="@lecturerId"
+                   class="btn btn-success btn-lg">
+                    <i class="bi bi-file-earmark-plus"></i> Create New Claim
+                </a>
+
+                <!--Button placeholder for trace claims -->
+                <a asp-controller="Claims"
+                   asp-action="Track"
+                   asp-route-lecturerId="@lecturerId"
+                   class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-search"></i> Trace Claims
+                </a>
+            </div>
+        </div>
+        <hr class="my-5" />
+        <div class="container mt-4">
+            <h4>My Recent Claims</h4>
+
+            @if (ViewBag.RecentClaims == null || !((List<ST10448420_CMCsystem.Models.Claims>)ViewBag.RecentClaims).Any())
+            {
+                <p class="text-muted">No recent claims yet.</p>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var c in (List<ST10448420_CMCsystem.Models.Claims>)ViewBag.RecentClaims)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@c.ClaimName</h5>
+                                    <p class="card-text text-muted">@c.ClaimDescription</p>
+                                    <p><strong>Status:</strong> @c.ClaimStatus</p>
+                                    <p><strong>Amount:</strong> R@(c.TotalHoursWorked* c.HourlyRate)</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ST10448420_CMCsystem.Models
 {
+    [Table("Claim")]
     public class Claims
     {
         [Key]

@@ -136,8 +136,14 @@ namespace ST10448420_CMCsystem.Controllers
             switch (role)
             {
                 case "Lecturer":
-                    isValid = _db.Lecturer.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("LecturerDashboard", "Dashboard", new { username = username });
+                    var lecturer = _db.Lecturer.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    if (lecturer != null)
+                    {
+                        // Store lecturer details for later
+                        TempData["LecturerID"] = lecturer.LecturerID;
+                        TempData["LecturerName"] = $"{lecturer.FirstName} {lecturer.LastName}";
+                        return RedirectToAction("LecturerDashboard", "Dashboard", new { lecturerId = lecturer.LecturerID });
+                    }
                     break;
 
                 case "AcademicManager":
