@@ -192,14 +192,15 @@ namespace ST10448420_CMCsystem.Controllers
         public async Task<IActionResult> ReviewClaims()
         {
             var allClaims = await _db.Claims
-        .Include(c => c.Lecturer)
-        .ToListAsync();
+                .Include(c => c.Lecturer)
+                .ToListAsync();
 
             var viewModel = new ClaimsDashboardViewModel
             {
                 PendingClaims = allClaims.Where(c => c.ClaimStatus == "Pending").ToList(),
-                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved").ToList(),
-                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected").ToList()
+                ReReviewClaims = allClaims.Where(c => c.ClaimStatus == "Approved by Programme Coordinator").ToList(),
+                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved by Academic Manager").ToList(),
+                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected by Academic Manager").ToList()
             };
 
             return View("~/Views/Dashboard/AcademicManagerDashboard.cshtml", viewModel);
@@ -227,24 +228,36 @@ namespace ST10448420_CMCsystem.Controllers
             var claim = await _db.Claims.FindAsync(id);
             if (claim == null) return NotFound();
 
-            claim.ClaimStatus = "Approved";
+            // If it's coming from PC approval, this is final
+            if (claim.ClaimStatus == "Approved by Programme Coordinator")
+                claim.ClaimStatus = "Approved by Academic Manager";
+            else
+                claim.ClaimStatus = "Approved";
+
             _db.Update(claim);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("ReviewClaims");
         }
+
         [HttpPost]
         public async Task<IActionResult> RejectClaims(string id)
         {
             var claim = await _db.Claims.FindAsync(id);
             if (claim == null) return NotFound();
 
-            claim.ClaimStatus = "Rejected";
+            // Differentiate who rejected
+            if (claim.ClaimStatus == "Approved by Programme Coordinator")
+                claim.ClaimStatus = "Rejected by Academic Manager";
+            else
+                claim.ClaimStatus = "Rejected";
+
             _db.Update(claim);
             await _db.SaveChangesAsync();
 
             return RedirectToAction("ReviewClaims");
         }
+
         //everything below focuses on the approval/rejection process used by Programme Coordinators
 
         [HttpGet]
@@ -257,8 +270,9 @@ namespace ST10448420_CMCsystem.Controllers
             var viewModel = new ClaimsDashboardViewModel
             {
                 PendingClaims = allClaims.Where(c => c.ClaimStatus == "Pending").ToList(),
-                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved").ToList(),
-                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected").ToList()
+                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved by Programme Coordinator").ToList(),
+                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected by Programme Coordinator").ToList()
+
             };
 
             return View("~/Views/Dashboard/ProgrammeCoordinatorDashboard.cshtml", viewModel);
@@ -306,5 +320,22 @@ namespace ST10448420_CMCsystem.Controllers
 
             return RedirectToAction("ReviewClaimsPC");
         }
+        //this action allows lecturers to trace their claims,so that they can see the status of their submissions
+        [HttpGet]
+        public async Task<IActionResult> TraceClaims(string lecturerId)
+        {
+            if (string.IsNullOrEmpty(lecturerId))
+            {
+                lecturerId = "L001"; // fallback or grab from session
+            }
+
+            var claims = await _db.Claims
+                .Where(c => c.LecturerID == lecturerId)
+                .OrderByDescending(c => c.ClaimDate)
+                .ToListAsync();
+
+            return View("~/Views/Claims/TraceClaims.cshtml", claims);
+        }
+
     }
 }

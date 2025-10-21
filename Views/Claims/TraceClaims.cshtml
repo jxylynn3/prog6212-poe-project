@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ST10448420_CMCsystem.Models.Claims>
+
+@{
+    ViewData["Title"] = "Track My Claims";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">My Claim Progress Tracker</h2>
+    <div class="mb-4">
+        <a asp-controller="Dashboard"
+           asp-action="LecturerDashboard"
+           asp-route-lecturerId="@ViewBag.LecturerID"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted text-center">No claims found yet. Submit one to start tracking!</p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var claim in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0 rounded-4">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@claim.ClaimName</h5>
+                            <p class="text-muted small">@claim.ClaimDescription</p>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <small><strong>Status:</strong> @claim.ClaimStatus</small>
+                                <small>@claim.ClaimDate.ToShortDateString()</small>
+                            </div>
+
+                            @{
+                                // Determine progress percentage and color based on status
+                                int progress = claim.ClaimStatus switch
+                                {
+                                    "Pending" => 25,
+                                    "Approved by Programme Coordinator" => 50,
+                                    "Approved by Academic Manager" => 100,
+                                    "Rejected by Programme Coordinator" => 50,
+                                    "Rejected by Academic Manager" => 100,
+                                    _ => 0
+                                };
+
+
+                                string barColor = claim.ClaimStatus.Contains("Approved") ? "bg-success"
+                                : claim.ClaimStatus.Contains("Rejected") ? "bg-danger"
+                                : "bg-warning text-dark";
+                            }
+
+                            <div class="progress rounded-pill" style="height: 20px;">
+                                <div class="progress-bar @barColor"
+                                     role="progressbar"
+                                     style="width:@progress%"
+                                     aria-valuenow="@progress"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @progress%
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <span class="badge @barColor px-3 py-2 rounded-pill">@claim.ClaimStatus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .progress {
+        background-color: #f3f3f3;
+    }
+    .card {
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+</style>
