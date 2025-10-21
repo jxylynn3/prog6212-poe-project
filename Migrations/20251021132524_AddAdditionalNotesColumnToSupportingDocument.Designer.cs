@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ST10448420_CMCsystem.Data;
 
@@ -11,9 +12,11 @@ using ST10448420_CMCsystem.Data;
 namespace ST10448420_CMCsystem.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251021132524_AddAdditionalNotesColumnToSupportingDocument")]
+    partial class AddAdditionalNotesColumnToSupportingDocument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,6 +230,7 @@ namespace ST10448420_CMCsystem.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("AdditionalNotes")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 

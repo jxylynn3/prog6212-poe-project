@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ST10448420_CMCsystem.Models.Claims>
+
+@if (!Model.Any())
+{
+    <p class="text-muted text-center">No claims found in this category.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var claim in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow border-0 h-100">
+                    <div class="card-body">
+                        <h5>@claim.ClaimName</h5>
+                        <p class="text-muted">@claim.ClaimDescription</p>
+                        <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
+                        <p><strong>Date:</strong> @claim.ClaimDate.ToShortDateString()</p>
+                        <p><strong>Total:</strong> R@(claim.TotalHoursWorked* claim.HourlyRate)</p>
+                        <span class="badge
+                                    @(claim.ClaimStatus == "Approved" ? "bg-success"
+                                                          : claim.ClaimStatus == "Rejected" ? "bg-danger"
+                                                          : "bg-warning text-dark")">
+                    @claim.ClaimStatus
+                </span>
+            </div>
+
+            @if (claim.ClaimStatus == "Pending")
+                    {
+                        <div class="card-footer bg-white text-center">
+                            <form asp-controller="Claims" asp-action="ApproveClaims" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@claim.ClaimID" />
+                                <button type="submit" class="btn btn-success btn-sm me-2">Approve</button>
+                            </form>
+
+                            <form asp-controller="Claims" asp-action="RejectClaims" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@claim.ClaimID" />
+                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+
+                            <a asp-controller="Claims" asp-action="ClaimDetails" asp-route-id="@claim.ClaimID"
+                               class="btn btn-outline-info btn-sm mt-2 d-block">View Details</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+

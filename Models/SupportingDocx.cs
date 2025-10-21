@@ -4,6 +4,7 @@ using System.Security.Claims;
 
 namespace ST10448420_CMCsystem.Models
 {
+    [Table("SupportingDocument")]
     public class SupportingDocx
     {
         [Key]
@@ -25,6 +26,6 @@ namespace ST10448420_CMCsystem.Models
         public DateTime UploadedDate { get; set; } = DateTime.Now;
 
         [StringLength(255)]
-        public string AdditionalNotes { get; set; }
+        public string? AdditionalNotes { get; set; }
     }
 }

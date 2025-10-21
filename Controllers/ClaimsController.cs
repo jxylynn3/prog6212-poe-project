@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ST10448420_CMCsystem.Data;
 using ST10448420_CMCsystem.Models;
+using ST10448420_CMCsystem.Models.ViewModels;
 
 namespace ST10448420_CMCsystem.Controllers
 {
@@ -108,7 +109,7 @@ namespace ST10448420_CMCsystem.Controllers
                         FilePath = f.FilePath,
                         UploadedDate = DateTime.Now
                     };
-                    _db.SupportingDocuments.Add(doc);
+                    _db.SupportingDocument.Add(doc);
                 }
                 _db.SaveChanges();
                  }
@@ -184,6 +185,65 @@ namespace ST10448420_CMCsystem.Controllers
 
             return View(claims);
 
+        }
+        //everything below focuses on the the approval/rejection process used by academic mangers
+        [HttpGet]
+        //views all pending claims for academic manager to review
+        public async Task<IActionResult> ReviewClaims()
+        {
+            var allClaims = await _db.Claims
+        .Include(c => c.Lecturer)
+        .ToListAsync();
+
+            var viewModel = new ClaimsDashboardViewModel
+            {
+                PendingClaims = allClaims.Where(c => c.ClaimStatus == "Pending").ToList(),
+                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved").ToList(),
+                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected").ToList()
+            };
+
+            return View("~/Views/Dashboard/AcademicManagerDashboard.cshtml", viewModel);
+        }
+        //allows for a detailed view of a specific claim
+        [HttpGet]
+        public async Task<IActionResult> ClaimDetails(string id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var claim = await _db.Claims
+                .Include(c => c.Lecturer)
+                .Include(c => c.SupportingDocuments)
+                .FirstOrDefaultAsync(c => c.ClaimID == id);
+
+            if (claim == null)
+                return NotFound();
+
+            return View("~/Views/Claims/ClaimDetails.cshtml", claim);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ApproveClaims(string id)
+        {
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = "Approved";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaims");
+        }
+        [HttpPost]
+        public async Task<IActionResult> RejectClaims(string id)
+        {
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = "Rejected";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaims");
         }
     }
 }

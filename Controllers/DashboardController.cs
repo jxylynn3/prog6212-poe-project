@@ -39,11 +39,11 @@ namespace ST10448420_CMCsystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult AcademicManagerDashboard(string username)
+        public IActionResult AcademicManagerDashboard()
         {
-            ViewBag.Username = username;
-            return View();
+            return RedirectToAction("ReviewClaims", "Claims");
         }
+
 
         [HttpGet]
         public IActionResult ProgrammeCoordinatorDashboard(string username)

@@ -3,36 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\supportingdocx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\supportingdocx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251020154825_fixclaimagain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251020154825_fixclaimagain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\claimcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\claimcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\shared\\_claimsgallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\shared\\_claimsgallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\dashboard\\academicmanagerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\dashboard\\academicmanagerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\viewmodels\\iclaimsdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\viewmodels\\iclaimsdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251020151057_SyncDbAfterClaimsFix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251020151057_SyncDbAfterClaimsFix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\claims\\claimdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\claims\\claimdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\dashboard\\lecturerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -43,6 +55,10 @@
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\claims\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\lecturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -51,8 +67,20 @@
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\claims.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\claimcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\claimcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\approval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\approval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\academicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\academicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -67,10 +95,6 @@
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\dashboard\\academicmanagerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\dashboard\\academicmanagerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -81,14 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\approval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\approval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\models\\academicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:models\\academicmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -113,10 +129,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\dashboard\\programmecoordinatordashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\dashboard\\programmecoordinatordashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -157,6 +169,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\migrations\\20251020105151_fixclaimstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:migrations\\20251020105151_fixclaimstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\migrations\\20251020154825_fixclaimagain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:migrations\\20251020154825_fixclaimagain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|c:\\users\\lab_services_student\\source\\repos\\st10448420_cmcsystem\\migrations\\20251020151057_syncdbafterclaimsfix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D145C7E1-560D-4186-94BD-828C8D3F6637}|ST10448420_CMCsystem.csproj|solutionrelative:migrations\\20251020151057_syncdbafterclaimsfix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -166,7 +186,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -182,58 +202,254 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs",
+              "RelativeToolTip": "Migrations\\20251021133007_AddAdditionalNotesColumnToSupportingDoc2.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBoAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T13:30:07.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs",
+              "RelativeToolTip": "Migrations\\20251021132524_AddAdditionalNotesColumnToSupportingDocument.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T13:25:24.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Controllers\\DashboardController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T17:09:33.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAiwCEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-18T17:22:32.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "SupportingDocx.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\SupportingDocx.cs",
+              "RelativeDocumentMoniker": "Models\\SupportingDocx.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\SupportingDocx.cs",
+              "RelativeToolTip": "Models\\SupportingDocx.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAmwBwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T16:27:03.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Data\\AppDBContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDBContext.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Data\\AppDBContext.cs",
+              "RelativeToolTip": "Data\\AppDBContext.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwBIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T13:06:59.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ClaimsController.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\ClaimsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClaimsController.cs",
               "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\ClaimsController.cs",
               "RelativeToolTip": "Controllers\\ClaimsController.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAawHAAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAwwEwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-18T21:15:45.007Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Claims\\Create.cshtml",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\Create.cshtml",
-              "RelativeToolTip": "Views\\Claims\\Create.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "AcademicManagerDashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\AcademicManagerDashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Dashboard\\AcademicManagerDashboard.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\AcademicManagerDashboard.cshtml",
+              "RelativeToolTip": "Views\\Dashboard\\AcademicManagerDashboard.cshtml",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-19T21:11:21.368Z",
+              "WhenOpened": "2025-10-18T20:12:24.626Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "List.cshtml",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\List.cshtml",
-              "RelativeDocumentMoniker": "Views\\Claims\\List.cshtml",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\List.cshtml",
-              "RelativeToolTip": "Views\\Claims\\List.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "ClaimDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\ClaimDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Claims\\ClaimDetails.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\ClaimDetails.cshtml",
+              "RelativeToolTip": "Views\\Claims\\ClaimDetails.cshtml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAiwDIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-19T21:48:48.68Z"
+              "WhenOpened": "2025-10-21T12:50:39.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ClaimsGallery.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_ClaimsGallery.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_ClaimsGallery.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_ClaimsGallery.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_ClaimsGallery.cshtml",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwCMAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T13:00:15.331Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "IClaimsDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ViewModels\\IClaimsDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\IClaimsDashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ViewModels\\IClaimsDashboardViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\IClaimsDashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T12:57:06.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "LecturerDashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\LecturerDashboard.cshtml",
               "RelativeDocumentMoniker": "Views\\Dashboard\\LecturerDashboard.cshtml",
               "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\LecturerDashboard.cshtml",
               "RelativeToolTip": "Views\\Dashboard\\LecturerDashboard.cshtml",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAiwA8AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAiwBkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-18T20:11:59.408Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
+              "Title": "List.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\List.cshtml",
+              "RelativeDocumentMoniker": "Views\\Claims\\List.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\List.cshtml",
+              "RelativeToolTip": "Views\\Claims\\List.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-19T21:48:48.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Claims\\Create.cshtml",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Claims\\Create.cshtml",
+              "RelativeToolTip": "Views\\Claims\\Create.cshtml",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAiwH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-19T21:11:21.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Lecturer.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Lecturer.cs",
+              "RelativeDocumentMoniker": "Models\\Lecturer.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Lecturer.cs",
+              "RelativeToolTip": "Models\\Lecturer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T16:23:13.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Claims.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Claims.cs",
+              "RelativeDocumentMoniker": "Models\\Claims.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Claims.cs",
+              "RelativeToolTip": "Models\\Claims.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwBkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T16:26:17.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ClaimCreateViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ClaimCreateViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ClaimCreateViewModel.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ClaimCreateViewModel.cs",
+              "RelativeToolTip": "Models\\ClaimCreateViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T21:14:28.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Approval.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Approval.cs",
+              "RelativeDocumentMoniker": "Models\\Approval.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Approval.cs",
+              "RelativeToolTip": "Models\\Approval.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwA0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T16:27:51.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AcademicManager.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\AcademicManager.cs",
+              "RelativeDocumentMoniker": "Models\\AcademicManager.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\AcademicManager.cs",
+              "RelativeToolTip": "Models\\AcademicManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T16:25:45.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
@@ -241,38 +457,11 @@
               "RelativeToolTip": "Controllers\\AccountController.cs",
               "ViewState": "AgIAAIEAAAAAAAAAAAAgwJIAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:58:15.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-18T16:58:15.969Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DashboardController.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\DashboardController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DashboardController.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\DashboardController.cs",
-              "RelativeToolTip": "Controllers\\DashboardController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAYwA8AAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T17:09:33.765Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SupportingDocx.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\SupportingDocx.cs",
-              "RelativeDocumentMoniker": "Models\\SupportingDocx.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\SupportingDocx.cs",
-              "RelativeToolTip": "Models\\SupportingDocx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:27:03.752Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 42,
               "Title": "20251020154825_fixclaimagain.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251020154825_fixclaimagain.cs",
               "RelativeDocumentMoniker": "Migrations\\20251020154825_fixclaimagain.cs",
@@ -280,25 +469,11 @@
               "RelativeToolTip": "Migrations\\20251020154825_fixclaimagain.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T15:48:25.501Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T15:48:25.501Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ClaimCreateViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ClaimCreateViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ClaimCreateViewModel.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ClaimCreateViewModel.cs",
-              "RelativeToolTip": "Models\\ClaimCreateViewModel.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T21:14:28.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 43,
               "Title": "20251020151057_SyncDbAfterClaimsFix.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251020151057_SyncDbAfterClaimsFix.cs",
               "RelativeDocumentMoniker": "Migrations\\20251020151057_SyncDbAfterClaimsFix.cs",
@@ -306,48 +481,11 @@
               "RelativeToolTip": "Migrations\\20251020151057_SyncDbAfterClaimsFix.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T15:10:58.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T15:10:58.118Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AppDBContext.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Data\\AppDBContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDBContext.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Data\\AppDBContext.cs",
-              "RelativeToolTip": "Data\\AppDBContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T13:06:59.232Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Lecturer.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Lecturer.cs",
-              "RelativeDocumentMoniker": "Models\\Lecturer.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Lecturer.cs",
-              "RelativeToolTip": "Models\\Lecturer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:23:13.456Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Claims.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Claims.cs",
-              "RelativeDocumentMoniker": "Models\\Claims.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Claims.cs",
-              "RelativeToolTip": "Models\\Claims.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwBgAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:26:17.432Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "20251020105151_FixClaimsTable.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251020105151_FixClaimsTable.cs",
               "RelativeDocumentMoniker": "Migrations\\20251020105151_FixClaimsTable.cs",
@@ -359,7 +497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "bootstrap-grid.css.map",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
               "RelativeDocumentMoniker": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
@@ -371,7 +509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
@@ -383,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
@@ -395,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Register.cshtml",
@@ -407,19 +545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AcademicManagerDashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\AcademicManagerDashboard.cshtml",
-              "RelativeDocumentMoniker": "Views\\Dashboard\\AcademicManagerDashboard.cshtml",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\AcademicManagerDashboard.cshtml",
-              "RelativeToolTip": "Views\\Dashboard\\AcademicManagerDashboard.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-18T20:12:24.626Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "UserAccountViewModel.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\UserAccountViewModel.cs",
               "RelativeDocumentMoniker": "Models\\UserAccountViewModel.cs",
@@ -431,7 +557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -443,31 +569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Approval.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Approval.cs",
-              "RelativeDocumentMoniker": "Models\\Approval.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\Approval.cs",
-              "RelativeToolTip": "Models\\Approval.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:27:51.577Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "AcademicManager.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\AcademicManager.cs",
-              "RelativeDocumentMoniker": "Models\\AcademicManager.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\AcademicManager.cs",
-              "RelativeToolTip": "Models\\AcademicManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T16:25:45.942Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -479,7 +581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -491,7 +593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "20251019195222_Accountfixes.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251019195222_Accountfixes.cs",
               "RelativeDocumentMoniker": "Migrations\\20251019195222_Accountfixes.cs",
@@ -503,7 +605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "20251019184237_AddSupportingDocxAndClaimChanges.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251019184237_AddSupportingDocxAndClaimChanges.cs",
               "RelativeDocumentMoniker": "Migrations\\20251019184237_AddSupportingDocxAndClaimChanges.cs",
@@ -515,7 +617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "ProgrammeCoordinator.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Models\\ProgrammeCoordinator.cs",
               "RelativeDocumentMoniker": "Models\\ProgrammeCoordinator.cs",
@@ -527,7 +629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -539,7 +641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "additional-methods.js",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
               "RelativeDocumentMoniker": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
@@ -551,7 +653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "ProgrammeCoordinatorDashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Dashboard\\ProgrammeCoordinatorDashboard.cshtml",
               "RelativeDocumentMoniker": "Views\\Dashboard\\ProgrammeCoordinatorDashboard.cshtml",
@@ -563,7 +665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -575,7 +677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
@@ -587,7 +689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "20251018201631_LoginANDRegistration.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251018201631_LoginANDRegistration.cs",
               "RelativeDocumentMoniker": "Migrations\\20251018201631_LoginANDRegistration.cs",
@@ -599,19 +701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-18T17:22:32.472Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
@@ -623,7 +713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -635,7 +725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "20251018164203_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\Migrations\\20251018164203_InitialCreate.cs",
               "RelativeDocumentMoniker": "Migrations\\20251018164203_InitialCreate.cs",
@@ -647,7 +737,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "ST10448420_CMCsystem.csproj",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\source\\repos\\ST10448420_CMCsystem\\ST10448420_CMCsystem.csproj",
               "RelativeDocumentMoniker": "ST10448420_CMCsystem.csproj",
