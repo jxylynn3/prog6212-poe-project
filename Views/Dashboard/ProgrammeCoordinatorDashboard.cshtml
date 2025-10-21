@@ -1,2 +1,135 @@
-﻿<h2>Welcome Programme Coordinator!</h2>
-<p>This is your dashboard</p>
+﻿@model ST10448420_CMCsystem.Models.ViewModels.ClaimsDashboardViewModel
+@{
+    ViewData["Title"] = "Programme Coordinator Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Programme Coordinator Dashboard</h2>
+
+    <!-- Tab navigation -->
+    <ul class="nav nav-tabs" id="claimsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">Pending</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button" role="tab">Approved</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab">Rejected</button>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content mt-4" id="claimsTabContent">
+
+        <!-- Pending Claims -->
+        <div class="tab-pane fade show active" id="pending" role="tabpanel">
+            @if (!Model.PendingClaims.Any())
+            {
+                <p class="text-muted text-center">No pending claims.</p>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var claim in Model.PendingClaims)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body">
+                                    <h5>@claim.ClaimName</h5>
+                                    <p>@claim.ClaimDescription</p>
+                                    <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
+                                    <p><strong>Status:</strong> @claim.ClaimStatus</p>
+
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <a asp-controller="Claims" asp-action="ClaimDetailsPC" asp-route-id="@claim.ClaimID" class="btn btn-outline-primary btn-sm">View</a>
+
+                                        <form asp-controller="Claims" asp-action="ApproveClaimsPC" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@claim.ClaimID" />
+                                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                        </form>
+
+                                        <form asp-controller="Claims" asp-action="RejectClaimsPC" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@claim.ClaimID" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Approved Claims -->
+        <div class="tab-pane fade" id="approved" role="tabpanel">
+            @if (!Model.ApprovedClaims.Any())
+            {
+                <p class="text-muted text-center">No approved claims yet.</p>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var claim in Model.ApprovedClaims)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-success shadow-sm">
+                                <div class="card-body">
+                                    <h5>@claim.ClaimName</h5>
+                                    <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
+                                    <p><strong>Status:</strong> ✅ Approved</p>
+                                    <a asp-controller="Claims" asp-action="ClaimDetailsPC" asp-route-id="@claim.ClaimID" class="btn btn-outline-primary btn-sm">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Rejected Claims -->
+        <div class="tab-pane fade" id="rejected" role="tabpanel">
+            @if (!Model.RejectedClaims.Any())
+            {
+                <p class="text-muted text-center">No rejected claims.</p>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var claim in Model.RejectedClaims)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card border-danger shadow-sm">
+                                <div class="card-body">
+                                    <h5>@claim.ClaimName</h5>
+                                    <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
+                                    <p><strong>Status:</strong> ❌ Rejected</p>
+                                    <a asp-controller="Claims" asp-action="ClaimDetailsPC" asp-route-id="@claim.ClaimID" class="btn btn-outline-primary btn-sm">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    // Keep active tab on reload
+    document.addEventListener("DOMContentLoaded", function () {
+        const activeTab = localStorage.getItem("activeTab");
+        if (activeTab) {
+            const tab = document.querySelector(`#claimsTabs button[data-bs-target='${activeTab}']`);
+            if (tab) new bootstrap.Tab(tab).show();
+        }
+    });
+
+    const tabButtons = document.querySelectorAll('#claimsTabs button');
+    tabButtons.forEach(tab => {
+        tab.addEventListener('shown.bs.tab', function (event) {
+            localStorage.setItem("activeTab", event.target.dataset.bsTarget);
+        });
+    });
+</script>

@@ -245,5 +245,66 @@ namespace ST10448420_CMCsystem.Controllers
 
             return RedirectToAction("ReviewClaims");
         }
+        //everything below focuses on the approval/rejection process used by Programme Coordinators
+
+        [HttpGet]
+        public async Task<IActionResult> ReviewClaimsPC()
+        {
+            var allClaims = await _db.Claims
+                .Include(c => c.Lecturer)
+                .ToListAsync();
+
+            var viewModel = new ClaimsDashboardViewModel
+            {
+                PendingClaims = allClaims.Where(c => c.ClaimStatus == "Pending").ToList(),
+                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved").ToList(),
+                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected").ToList()
+            };
+
+            return View("~/Views/Dashboard/ProgrammeCoordinatorDashboard.cshtml", viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ClaimDetailsPC(string id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var claim = await _db.Claims
+                .Include(c => c.Lecturer)
+                .Include(c => c.SupportingDocuments)
+                .FirstOrDefaultAsync(c => c.ClaimID == id);
+
+            if (claim == null)
+                return NotFound();
+
+            return View("~/Views/Claims/ClaimDetailsPC.cshtml", claim);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ApproveClaimsPC(string id)
+        {
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = "Approved by Programme Coordinator";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaimsPC");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RejectClaimsPC(string id)
+        {
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = "Rejected by Programme Coordinator";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaimsPC");
+        }
     }
 }

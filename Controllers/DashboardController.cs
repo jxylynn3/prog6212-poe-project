@@ -46,11 +46,11 @@ namespace ST10448420_CMCsystem.Controllers
 
 
         [HttpGet]
-        public IActionResult ProgrammeCoordinatorDashboard(string username)
+        public IActionResult ProgrammeCoordinatorDashboard()
         {
-            ViewBag.Username = username;
-            return View();
+            return RedirectToAction("ReviewClaimsPC", "Claims");
         }
+
     }
 }
 
