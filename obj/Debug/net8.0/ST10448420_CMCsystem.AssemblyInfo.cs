@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ST10448420_CMCsystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e952cac70069d9e763aeef213ca672f02f392813")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db1d7b80a90ca051d0b7ad12a233c1e9dad377b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ST10448420_CMCsystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ST10448420_CMCsystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

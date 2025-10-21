@@ -1,5 +1,80 @@
 ﻿@model IEnumerable<ST10448420_CMCsystem.Models.Claims>
 
+<style>
+    /* 🌈 Legend Styling */
+    .legend-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin: 1.5rem 0;
+        font-weight: 600;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #344628;
+    }
+
+    .legend-color {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        display: inline-block;
+        border: 1px solid #ccc;
+    }
+
+    .pending-color {
+        background-color: #C9CBA3;
+    }
+
+    .approved-color {
+        background-color: #FFE1A8;
+    }
+
+    .rejected-color {
+        background-color: #E26D5C;
+    }
+
+    .final-color {
+        background-color: #723D46;
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .badge-pending {
+        background-color: #C9CBA3;
+        color: #344628;
+    }
+
+    .badge-approved {
+        background-color: #FFE1A8;
+        color: #344628;
+    }
+
+    .badge-rejected {
+        background-color: #E26D5C;
+        color: white;
+    }
+
+    .badge-final {
+        background-color: #723D46;
+        color: white;
+    }
+
+    .badge-default {
+        background-color: #ccc;
+        color: #333;
+    }
+</style>
+
 @if (!Model.Any())
 {
     <p class="text-muted text-center">No claims found in this category.</p>
@@ -17,15 +92,19 @@ else
                         <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
                         <p><strong>Date:</strong> @claim.ClaimDate.ToShortDateString()</p>
                         <p><strong>Total:</strong> R@(claim.TotalHoursWorked* claim.HourlyRate)</p>
+
+
                         <span class="badge
-                                            @(claim.ClaimStatus == "Approved" ? "bg-success"
-                                                                                        : claim.ClaimStatus == "Rejected" ? "bg-danger"
-                                                                                        : "bg-warning text-dark")">
+            @(claim.ClaimStatus == "Pending" ? "badge-pending" :
+                                    claim.ClaimStatus == "Approved by Coordinator" ? "badge-approved" :
+                                    claim.ClaimStatus == "Rejected by Coordinator" ? "badge-rejected" :
+                                    claim.ClaimStatus == "Final Approval / Rejection" ? "badge-final" : "badge-default")">
                     @claim.ClaimStatus
                 </span>
+
             </div>
 
-                    <!-- 🟡 PENDING CLAIMS: Programme Coordinator or initial approval stage -->
+                    <!--  PENDING CLAIMS PART -->
             @if (claim.ClaimStatus == "Pending")
                     {
                         <div class="card-footer bg-white text-center">
@@ -50,7 +129,7 @@ else
                         </div>
                     }
 
-                    <!-- 🔵 RE-REVIEW CLAIMS: Academic Manager Approval Stage -->
+                    <!-- RE-REVIEW CLAIMS PART -->
                     @if (ViewData["Role"]?.ToString() == "AcademicManager" && claim.ClaimStatus == "Approved by Programme Coordinator")
                     {
                         <div class="card-footer bg-white text-center">
@@ -74,7 +153,6 @@ else
                             </a>
                         </div>
                     }
-
                 </div>
             </div>
         }

@@ -1,6 +1,11 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\1.png
 wwwroot\images\Campus Leisure Time.jpg
+wwwroot\images\dashboard (1).png
+wwwroot\images\dashboard (2).png
+wwwroot\images\dashboard.png
+wwwroot\images\Sign Up.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

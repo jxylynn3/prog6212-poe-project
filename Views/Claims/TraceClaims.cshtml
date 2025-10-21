@@ -5,12 +5,21 @@
 }
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">My Claim Progress Tracker</h2>
-    <div class="mb-4">
+    <h2 class="page-title mb-4 text-center">My Claim Progress Tracker</h2>
+
+
+    <div class="legend-container text-center mb-4">
+        <span class="legend-item"><span class="legend-color" style="background-color:#C9CBA3;"></span> Pending</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#FFE1A8;"></span> Approved by Coordinator</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#E26D5C;"></span> Rejected by Coordinator</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#723D46;"></span> Final Approval / Rejection</span>
+    </div>
+
+    <div class="mb-4 text-center">
         <a asp-controller="Dashboard"
            asp-action="LecturerDashboard"
            asp-route-lecturerId="@ViewBag.LecturerID"
-           class="btn btn-outline-secondary">
+           class="btn-sage-green">
             <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
         </a>
     </div>
@@ -25,9 +34,9 @@
             @foreach (var claim in Model)
             {
                 <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card claim-card border-0 rounded-4 shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">@claim.ClaimName</h5>
+                            <h5 class="card-title fw-bold text-dark-green">@claim.ClaimName</h5>
                             <p class="text-muted small">@claim.ClaimDescription</p>
 
                             <div class="d-flex justify-content-between mb-1">
@@ -36,7 +45,6 @@
                             </div>
 
                             @{
-                                // Determine progress percentage and color based on status
                                 int progress = claim.ClaimStatus switch
                                 {
                                     "Pending" => 25,
@@ -47,13 +55,18 @@
                                     _ => 0
                                 };
 
-
-                                string barColor = claim.ClaimStatus.Contains("Approved") ? "bg-success"
-                                : claim.ClaimStatus.Contains("Rejected") ? "bg-danger"
-                                : "bg-warning text-dark";
+                                string barColor = claim.ClaimStatus switch
+                                {
+                                    "Pending" => "bg-pending",
+                                    "Approved by Programme Coordinator" => "bg-approved",
+                                    "Approved by Academic Manager" => "bg-final",
+                                    "Rejected by Programme Coordinator" => "bg-rejected",
+                                    "Rejected by Academic Manager" => "bg-final",
+                                    _ => "bg-pending"
+                                };
                             }
 
-                            <div class="progress rounded-pill" style="height: 20px;">
+                            <div class="progress rounded-pill mt-2" style="height: 18px;">
                                 <div class="progress-bar @barColor"
                                      role="progressbar"
                                      style="width:@progress%"
@@ -64,7 +77,7 @@
                                 </div>
                             </div>
 
-                            <div class="mt-3">
+                            <div class="mt-3 text-center">
                                 <span class="badge @barColor px-3 py-2 rounded-pill">@claim.ClaimStatus</span>
                             </div>
                         </div>
@@ -76,14 +89,94 @@
 </div>
 
 <style>
-    .progress {
-        background-color: #f3f3f3;
+
+    body {
+        background-color: #f9faf8;
+        font-family: 'Segoe UI', sans-serif;
     }
-    .card {
+
+    .page-title {
+        color: #344628;
+        font-weight: 700;
+    }
+
+    .legend-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        font-size: 0.9rem;
+        color: #344628;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .legend-color {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid #ccc;
+    }
+
+    .claim-card {
+        background-color: #ffffffcc;
         transition: transform 0.2s ease, box-shadow 0.3s ease;
+        border: 2px solid #e7ebe3;
     }
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+
+        .claim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+        }
+
+    .text-dark-green {
+        color: #344628;
+    }
+
+    .btn-sage-green {
+        background-color: #98a58e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-sage-green:hover {
+            background-color: #87967d;
+            transform: translateY(-2px);
+        }
+
+    .progress {
+        background-color: #e9ece6;
+    }
+
+    .bg-pending {
+        background-color: #C9CBA3 !important;
+        color: #344628;
+    }
+
+    .bg-approved {
+        background-color: #FFE1A8 !important;
+        color: #344628;
+    }
+
+    .bg-rejected {
+        background-color: #E26D5C !important;
+        color: white;
+    }
+
+    .bg-final {
+        background-color: #723D46 !important;
+        color: white;
+    }
+
+    .badge {
+        font-size: 0.9rem;
     }
 </style>

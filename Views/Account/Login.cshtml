@@ -1,35 +1,57 @@
 ﻿@{
     ViewData["Title"] = "Login";
 }
-<h2>Login</h2>
 
-@if (TempData["RegisterSuccess"] != null)
-{
-    <div class="alert alert-success">@TempData["RegisterSuccess"]</div>
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-image: url("/images/1.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-end">
+        <div class="col-md-4 p-5 bg-white bg-opacity-75 rounded shadow me-5">
+            @if (TempData["RegisterSuccess"] != null)
+            {
+                <div class="alert alert-success">@TempData["RegisterSuccess"]</div>
+            }
 
-<form asp-action="Login" method="post">
-    @Html.AntiForgeryToken()
-    <div>
-        <label>Username</label>
-        <input name="username" class="form-control" />
-    </div>
-    <div>
-        <label>Password</label>
-        <input name="password" type="password" class="form-control" />
-    </div>
-    <div>
-        <label>Role</label>
-        <select name="role" class="form-control">
-            <option value="Lecturer">Lecturer</option>
-            <option value="AcademicManager">Academic Manager</option>
-            <option value="ProgrammeCoordinator">Programme Coordinator</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-success mt-3">Login</button>
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label>Username</label>
+                    <input name="username" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input name="password" type="password" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Role</label>
+                    <select name="role" class="form-control">
+                        <option value="Lecturer">Lecturer</option>
+                        <option value="AcademicManager">Academic Manager</option>
+                        <option value="ProgrammeCoordinator">Programme Coordinator</option>
+                    </select>
+                </div>
 
-    @if (ViewBag.Error != null)
-    {
-        <p class="text-danger mt-2">@ViewBag.Error</p>
-    }
-</form>
+                <button type="submit" class="btn w-100 mt-2" style="background-color: #344628; border: none; color: #F7F7F7; font-weight: 500;">Login</button>
+
+                @if (ViewBag.Error != null)
+                {
+                    <p class="text-danger mt-2">@ViewBag.Error</p>
+                }
+            </form>
+        </div>
+    </div>
+</body>
+</html>

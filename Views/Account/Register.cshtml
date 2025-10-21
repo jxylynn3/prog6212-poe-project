@@ -1,36 +1,60 @@
 ﻿@model ST10448420_CMCsystem.Models.UserAccountViewModel
+@{
+    ViewData["Title"] = "Register";
+}
 
-<h2>Register</h2>
-<form asp-action="Register" method="post">
-    @Html.AntiForgeryToken()
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div>
-        <label>First Name</label>
-        <input asp-for="FirstName" class="form-control" />
+<div class="container-fluid vh-100 d-flex align-items-start justify-content-end"
+     style="background-image: url('/images/Sign Up.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding-top: 80px;">
+
+
+    <div class="col-md-4 p-3 bg-white bg-opacity-75 rounded shadow"
+         style="width: 420px; height: 440px; margin-right: 29px; margin-top: 27px;">
+
+
+        <form asp-action="Register" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="mb-2">
+                <label class="form-label">First Name</label>
+                <input asp-for="FirstName" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Last Name</label>
+                <input asp-for="LastName" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Username</label>
+                <input asp-for="Username" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select asp-for="Role" class="form-control form-control-sm">
+                    <option value="Lecturer">Lecturer</option>
+                    <option value="AcademicManager">Academic Manager</option>
+                    <option value="ProgrammeCoordinator">Programme Coordinator</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn w-100 mt-2" style="background-color: #344628; border: none; color: #F7F7F7; font-weight: 500;"> Register </button>
+        </form>
     </div>
-    <div>
-        <label>Last Name</label>
-        <input asp-for="LastName" class="form-control" />
-    </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div>
-        <label>Username</label>
-        <input asp-for="Username" class="form-control" />
-    </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" type="password" class="form-control" />
-    </div>
-    <div>
-        <label>Role</label>
-        <select asp-for="Role" class="form-control">
-            <option value="Lecturer">Lecturer</option>
-            <option value="AcademicManager">Academic Manager</option>
-            <option value="ProgrammeCoordinator">Programme Coordinator</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Register</button>
-</form>
+</div>

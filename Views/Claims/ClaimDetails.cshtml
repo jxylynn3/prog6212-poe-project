@@ -4,6 +4,70 @@
     ViewData["Title"] = "Claim Details";
 }
 
+<style>
+
+    .btn-dark-green {
+        background-color: #344628;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 25px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-dark-green:hover {
+            background-color: #2c3b22;
+            transform: translateY(-2px);
+        }
+
+    .btn-sage-green {
+        background-color: #98a58e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 25px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-sage-green:hover {
+            background-color: #87967d;
+            transform: translateY(-2px);
+        }
+
+    .form-actions {
+        margin-top: 1.8rem;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    form label {
+        font-weight: 600;
+        color: #344628;
+    }
+
+    h2 {
+        color: #344628;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    dt {
+        color: #344628;
+        font-weight: 600;
+    }
+
+    dd {
+        color: #555;
+    }
+</style>
+
 <div class="container mt-5">
     <div class="card shadow border-0">
         <div class="card-body">
@@ -25,7 +89,6 @@
                 <dt class="col-sm-3">Hourly Rate</dt>
                 <dd class="col-sm-9">R @Model.HourlyRate</dd>
 
-
                 <dt class="col-sm-3">Total Salary</dt>
                 <dd class="col-sm-9">R@(Model.TotalHoursWorked* Model.HourlyRate)</dd>
 
@@ -36,7 +99,7 @@
                 <dd class="col-sm-9">@Model.ClaimSubmissionDate</dd>
             </dl>
 
-            <h5>Supporting Documents</h5>
+            <h5 class="mt-4" style="color: #344628;">Supporting Documents</h5>
             @if (Model.SupportingDocuments == null || !Model.SupportingDocuments.Any())
             {
                 <p class="text-muted">No documents uploaded.</p>
@@ -51,18 +114,20 @@
                 </ul>
             }
 
-            <div class="mt-4 text-center">
+            <div class="form-actions">
                 <form asp-controller="Claims" asp-action="ApproveClaims" method="post" class="d-inline">
                     <input type="hidden" name="id" value="@Model.ClaimID" />
-                    <button type="submit" class="btn btn-success me-2">Approve</button>
+                    <button type="submit" class="btn-dark-green">Approve</button>
                 </form>
 
                 <form asp-controller="Claims" asp-action="RejectClaims" method="post" class="d-inline">
                     <input type="hidden" name="id" value="@Model.ClaimID" />
-                    <button type="submit" class="btn btn-danger">Reject</button>
+                    <button type="submit" class="btn-sage-green">Reject</button>
                 </form>
 
-                <a asp-controller="Claims" asp-action="ReviewClaims" class="btn btn-outline-secondary ms-3">Back</a>
+                <a asp-controller="Claims" asp-action="ReviewClaims" class="btn btn-outline-secondary">
+                    Back
+                </a>
             </div>
         </div>
     </div>
