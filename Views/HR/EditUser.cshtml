@@ -1,0 +1,25 @@
+﻿@model dynamic
+@{
+    var role = ViewBag.Role as string;
+}
+
+<h2>Edit @role</h2>
+
+<form method="post">
+    <input type="hidden" name="role" value="@role" />
+    <input type="hidden" name="id" value="@Model.GetType().GetProperty(role + "ID")?.GetValue(Model)" />
+
+    <label>First Name</label>
+    <input name="FirstName" class="form-control" value="@Model.FirstName" />
+
+    <label>Last Name</label>
+    <input name="LastName" class="form-control" value="@Model.LastName" />
+
+    <label>Email</label>
+    <input name="Email" class="form-control" value="@Model.Email" />
+
+    <label>Username</label>
+    <input name="Username" class="form-control" value="@Model.Username" />
+
+    <button class="btn btn-primary mt-2">Save</button>
+</form>

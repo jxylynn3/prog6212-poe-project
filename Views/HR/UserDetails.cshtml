@@ -1,0 +1,9 @@
+﻿@model dynamic
+
+<h2>User Details</h2>
+
+<p><strong>Name:</strong> @Model.FirstName @Model.LastName</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Username:</strong> @Model.Username</p>
+
+<a asp-action="ManageUsers" class="btn btn-secondary">Back</a>

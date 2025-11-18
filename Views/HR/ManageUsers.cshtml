@@ -1,0 +1,110 @@
+﻿@model ST10448420_CMCsystem.Models.ViewModels.HRUserManagementViewModel
+
+<h2>Manage Users</h2>
+
+<h3>Lecturers</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Lecturers)
+        {
+            <tr>
+                <td>@user.FirstName @user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Username</td>
+                <td>
+                    <a asp-controller="HR" asp-action="UserDetails"
+                       asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
+                       class="btn btn-info btn-sm">Details</a>
+
+                    <a asp-controller="HR" asp-action="EditUser"
+                       asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
+                       class="btn btn-warning btn-sm">Edit</a>
+
+                    <a asp-controller="HR" asp-action="DeleteUser"
+                       asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
+                       class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h3>Programme Coordinators</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.ProgrammeCoordinators)
+        {
+            <tr>
+                <td>@user.FirstName @user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Username</td>
+                <td>
+                    <a asp-controller="HR" asp-action="UserDetails"
+                       asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
+                       class="btn btn-info btn-sm">Details</a>
+
+                    <a asp-controller="HR" asp-action="EditUser"
+                       asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
+                       class="btn btn-warning btn-sm">Edit</a>
+
+                    <a asp-controller="HR" asp-action="DeleteUser"
+                       asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
+                       class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h3>Academic Managers</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.AcademicManagers)
+        {
+            <tr>
+                <td>@user.FirstName @user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Username</td>
+                <td>
+                    <a asp-controller="HR" asp-action="UserDetails"
+                       asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
+                       class="btn btn-info btn-sm">Details</a>
+
+                    <a asp-controller="HR" asp-action="EditUser"
+                       asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
+                       class="btn btn-warning btn-sm">Edit</a>
+
+                    <a asp-controller="HR" asp-action="DeleteUser"
+                       asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
+                       class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

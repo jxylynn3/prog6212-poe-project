@@ -82,11 +82,11 @@ wwwroot\uploads\f4b0f122-f\73fd1197_college core.jpg
 wwwroot\uploads\temp_164117\dc9886d0_download (1).jpg
 wwwroot\uploads\temp_3be63c\eecc66e9_Campus Leisure Time.jpg
 wwwroot\uploads\temp_432775\0b99cd90_dashboard.pdf
+wwwroot\uploads\temp_472d89\689d2c76_ABCdashboard.png
 wwwroot\uploads\temp_5116b6\f74ee9f4_dashboard.png
 wwwroot\uploads\temp_95874c\4684767b_download (1).jpg
+wwwroot\uploads\temp_b7212b\2513c53b_Autumn Campus Aerial.jpg
 wwwroot\uploads\temp_bfa842\94688439_download (3).jpg
 wwwroot\uploads\temp_cc919b\7b415056_download (1).jpg
 wwwroot\uploads\temp_f40855\3c13767f_download (1).jpg
 wwwroot\uploads\temp_f6be6d\597f1f68_college core.jpg
-wwwroot\uploads\temp_b7212b\2513c53b_Autumn Campus Aerial.jpg
-wwwroot\uploads\temp_472d89\689d2c76_ABCdashboard.png
