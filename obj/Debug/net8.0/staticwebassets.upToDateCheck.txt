@@ -88,3 +88,5 @@ wwwroot\uploads\temp_bfa842\94688439_download (3).jpg
 wwwroot\uploads\temp_cc919b\7b415056_download (1).jpg
 wwwroot\uploads\temp_f40855\3c13767f_download (1).jpg
 wwwroot\uploads\temp_f6be6d\597f1f68_college core.jpg
+wwwroot\uploads\temp_b7212b\2513c53b_Autumn Campus Aerial.jpg
+wwwroot\uploads\temp_472d89\689d2c76_ABCdashboard.png

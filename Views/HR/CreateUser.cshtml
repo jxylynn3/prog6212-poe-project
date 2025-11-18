@@ -1,0 +1,32 @@
+﻿@using ST10448420_CMCsystem.Models.ViewModels
+@model HRUserCreationViewModel
+
+<h2>Create New User</h2>
+
+<form asp-action="CreateUser">
+
+    <label>Role</label>
+    <select asp-for="Role" class="form-control">
+        <option value="">Select role</option>
+        <option value="Lecturer">Lecturer</option>
+        <option value="AcademicManager">Academic Manager</option>
+        <option value="ProgrammeCoordinator">Programme Coordinator</option>
+    </select>
+
+    <label>First Name</label>
+    <input asp-for="FirstName" class="form-control" />
+
+    <label>Last Name</label>
+    <input asp-for="LastName" class="form-control" />
+
+    <label>Email</label>
+    <input asp-for="Email" class="form-control" />
+
+    <label>Username</label>
+    <input asp-for="Username" class="form-control" />
+
+    <label>Password</label>
+    <input asp-for="Password" class="form-control" />
+
+    <button type="submit" class="btn btn-success mt-3">Create</button>
+</form>

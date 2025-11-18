@@ -155,6 +155,16 @@ namespace ST10448420_CMCsystem.Controllers
                     isValid = _db.ProgrammeCoordinator.Any(x => x.Username == username && x.Password == password);
                     if (isValid) return RedirectToAction("ProgrammeCoordinatorDashboard", "Dashboard", new { username = username });
                     break;
+                //Case for HR role can be added here in future
+                case "HR":
+                    var hr = _db.HR.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    if (hr != null)
+                    {
+                        TempData["HRID"] = hr.HRID;
+                        TempData["HRName"] = $"{hr.FirstName} {hr.Surname}";
+                        return RedirectToAction("HRDashboard", "Dashboard");
+                    }
+                    break;
 
                 default:
                     ViewBag.Error = "Unknown role.";

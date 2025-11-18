@@ -15,8 +15,23 @@ namespace ST10448420_CMCsystem.Data
         public DbSet<Claims> Claims { get; set; }
         public DbSet<SupportingDocx> SupportingDocument { get; set; }
         public DbSet<Approval> Approvals { get; set; }
-
- 
+        //part 03
+        public DbSet<HR> HR { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);//seed data for HR table
+            modelBuilder.Entity<HR>().HasData(
+            new HR
+            {
+            HRID = "HR000001",
+            FirstName = "System",
+            Surname = "Administrator",
+            Email = "hr@system.com",
+            Username = "HRadmin",
+            Password = "#HRadmin123#"
+            }
+        );
+        }
 
     }
 }

@@ -50,7 +50,13 @@ namespace ST10448420_CMCsystem.Controllers
         {
             return RedirectToAction("ReviewClaimsPC", "Claims");
         }
-
+        //part 03
+        //this method ensures that when HR logs in, they are directed to the HR dashboard view
+        [HttpGet]
+        public IActionResult HRDashboard()
+        {
+            return View();
+        }
     }
 }
 
