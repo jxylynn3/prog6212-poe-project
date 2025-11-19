@@ -47,19 +47,28 @@ namespace ST10448420_CMCsystem.Controllers
         //}
 
         // POST: submit completed claim
-    [HttpPost]
-    [ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(ClaimCreateViewModel vm)
         {
             if (string.IsNullOrEmpty(vm.ClaimID))
             {
                 vm.ClaimID = "CLM" + Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
             }
+
             ModelState.Remove(nameof(vm.ClaimID));
+
             if (!ModelState.IsValid)
             {
                 var errors = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
                 Console.WriteLine("ModelState invalid: " + errors);
+                return View(vm);
+            }
+
+            //this allows us to validate the total hours worked field to ensure it falls within the specified range
+            if (vm.TotalHoursWorked < 5 || vm.TotalHoursWorked > 195)
+            {
+                ModelState.AddModelError("TotalHoursWorked", "Total hours must be between 5 and 195 hours per month.");
                 return View(vm);
             }
 
@@ -78,6 +87,15 @@ namespace ST10448420_CMCsystem.Controllers
                 }
             }
 
+            // fetch lecturer to get hourly rate
+            var lecturer = _db.Lecturer.First(l => l.LecturerID == vm.LecturerID);
+
+            decimal hourlyRate = lecturer.HourlyRate;
+
+            // Minimum enforcement
+            if (hourlyRate < 28.79m)
+                hourlyRate = 28.79m;
+
             var claim = new Claims
             {
                 ClaimID = vm.ClaimID,
@@ -85,18 +103,23 @@ namespace ST10448420_CMCsystem.Controllers
                 ClaimName = vm.ClaimName,
                 ClaimDescription = vm.ClaimDescription,
                 ClaimDate = vm.ClaimDate,
-                TotalHoursWorked = vm.TotalHoursWorked,
-                HourlyRate = vm.HourlyRate,
-                ClaimStatus = string.IsNullOrWhiteSpace(vm.ClaimStatus) ? "Pending" : vm.ClaimStatus,
+
+                TotalHoursWorked = vm.TotalHoursWorked, // double 
+                HourlyRate = hourlyRate,                // decimal
+
+                // TOTAL AMOUNT MUST BE DECIMAL × DOUBLE -> CAST THE DOUBLE
+                TotalAmount = hourlyRate * (decimal)vm.TotalHoursWorked,
+
+                ClaimStatus = "Pending",
                 ClaimSubmissionDate = DateTime.Now
             };
 
+
             _db.Claims.Add(claim);
             _db.SaveChanges();
-            Console.WriteLine($"Claim saved: {claim.ClaimID}");// this helps make sure the claim is saved(for me)
+            Console.WriteLine($"Claim saved: {claim.ClaimID}");
 
-
-            // persisted uploaded files (added by client as hidden inputs)
+            // persisted uploaded files  
             if (vm.UploadedFiles != null && vm.UploadedFiles.Any())
             {
                 foreach (var f in vm.UploadedFiles)
@@ -112,11 +135,12 @@ namespace ST10448420_CMCsystem.Controllers
                     _db.SupportingDocument.Add(doc);
                 }
                 _db.SaveChanges();
-                 }
+            }
 
             return RedirectToAction("List", new { lecturerId = vm.LecturerID });
-            // I redirect to Claims.List so user sees the new claim immediately in My Claims
         }
+        // I redirect to Claims.List so user sees the new claim immediately in My Claims
+
 
         // AJAX: upload file and immediately save it to server & return JSON info
         [HttpPost]
@@ -134,7 +158,7 @@ namespace ST10448420_CMCsystem.Controllers
             if (file.Length > 10 * 1024 * 1024)
                 return BadRequest("File too large.");
 
-            // 🛠 Handle missing claimId gracefully
+            // Handle missing claimId gracefully
             if (string.IsNullOrEmpty(claimId))
             {
                 claimId = "temp_" + Guid.NewGuid().ToString("N").Substring(0, 6);

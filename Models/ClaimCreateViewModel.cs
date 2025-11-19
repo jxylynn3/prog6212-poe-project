@@ -26,15 +26,17 @@ namespace ST10448420_CMCsystem.Models
         public DateTime ClaimDate { get; set; } = DateTime.Today;
 
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Enter valid hours.")]
-        public double TotalHoursWorked { get; set; }
+        [Range(5, 195, ErrorMessage = "Hours worked must be between 5 and 195 hours per month.")]
+        public decimal TotalHoursWorked { get; set; }
+
 
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Enter valid hourly rate.")]
-        public double HourlyRate { get; set; }
+        [Range(typeof(decimal), "28.79", "9999", ErrorMessage = "Hourly rate must be at least R28.79.")]
+        public decimal HourlyRate { get; set; }
 
+        // Auto-calculated total
         [NotMapped]
-        public double TotalSalary => TotalHoursWorked * HourlyRate;
+        public decimal TotalSalary => (decimal)TotalHoursWorked * HourlyRate;
 
         [StringLength(50)]
         public string ClaimStatus { get; set; } = "Pending";
@@ -44,15 +46,13 @@ namespace ST10448420_CMCsystem.Models
         [StringLength(500)]
         public string AdditionalNotes { get; set; }
 
-        //Handles uploaded files before saving
-        [Display(Name = "Supporting Documents")]
+        // Uploads before saving
         public List<IFormFile> SupportingDocuments { get; set; } = new();
 
-        // Stores file info after upload
+        // Saved metadata
         public List<UploadedFileDto> UploadedFiles { get; set; } = new();
     }
 
-    // DTO for uploaded files (metadata only)
     public class UploadedFileDto
     {
         public string DocumentID { get; set; }

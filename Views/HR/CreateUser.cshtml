@@ -6,7 +6,7 @@
 <form asp-action="CreateUser">
 
     <label>Role</label>
-    <select asp-for="Role" class="form-control">
+    <select asp-for="Role" class="form-control" id="roleDropdown">
         <option value="">Select role</option>
         <option value="Lecturer">Lecturer</option>
         <option value="AcademicManager">Academic Manager</option>
@@ -26,7 +26,27 @@
     <input asp-for="Username" class="form-control" />
 
     <label>Password</label>
-    <input asp-for="Password" class="form-control" />
+    <input asp-for="Password" class="form-control" type="password" />
+
+    <!-- HOURLY RATE SECTION (hidden unless role == Lecturer) -->
+    <div id="hourlyRateSection" style="display:none;">
+        <label>Hourly Rate</label>
+        <input asp-for="HourlyRate" class="form-control" type="number" step="0.01" min="0" />
+    </div>
 
     <button type="submit" class="btn btn-success mt-3">Create</button>
 </form>
+
+<script>
+    // Dynamically show hourly rate for Lecturers solely
+    const roleDropdown = document.getElementById("roleDropdown");
+    const hourlyRateSection = document.getElementById("hourlyRateSection");
+
+    roleDropdown.addEventListener("change", function () {
+        if (this.value === "Lecturer") {
+            hourlyRateSection.style.display = "block";
+        } else {
+            hourlyRateSection.style.display = "none";
+        }
+    });
+</script>

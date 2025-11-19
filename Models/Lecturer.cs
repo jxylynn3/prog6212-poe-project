@@ -24,6 +24,8 @@ namespace ST10448420_CMCsystem.Models
 
         [Required, StringLength(50)]
         public string Password { get; set; }
+        //part 03
+        public decimal HourlyRate { get; set; } 
 
         // Navigation Property
         public ICollection<Claims> Claims { get; set; }

@@ -26,15 +26,18 @@ namespace ST10448420_CMCsystem.Models
         public DateTime ClaimDate { get; set; }
 
         [Required]
-        [Range(0.01, double.MaxValue)]
-        public double TotalHoursWorked { get; set; }
+        [Range(typeof(decimal), "0.01", "9999")]
+        public decimal TotalHoursWorked { get; set; }
+
+        // This stores the final money value
+        public decimal TotalAmount { get; set; }
 
         [Required]
-        [Range(0.01, double.MaxValue)]
-        public double HourlyRate { get; set; }
+        [Range(typeof(decimal), "28.79", "9999")]
+        public decimal HourlyRate { get; set; }
 
         [NotMapped]
-        public double TotalSalary => TotalHoursWorked * HourlyRate;
+        public decimal TotalSalary => TotalHoursWorked * HourlyRate;
 
         [StringLength(50)]
         public string ClaimStatus { get; set; } = "Pending";

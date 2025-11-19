@@ -28,6 +28,14 @@ namespace ST10448420_CMCsystem.Controllers
        
         if (!ModelState.IsValid)
                 return View(vm);
+            if (vm.Role == "Lecturer")
+            { 
+            if (vm.HourlyRate < 28.79m)
+                {
+                    ModelState.AddModelError("HourlyRate", "Hourly rate cannot be less than the government minimum of R28.79.");
+                    return View(vm);
+                }
+            }
             //the switch is used to determine which type of user to create based on the selected role
             switch (vm.Role)
             {
@@ -39,7 +47,8 @@ namespace ST10448420_CMCsystem.Controllers
                         LastName = vm.LastName,
                         Email = vm.Email,
                         Username = vm.Username,
-                        Password = vm.Password
+                        Password = vm.Password,
+                        HourlyRate = vm.HourlyRate
                     });
                     break;
 

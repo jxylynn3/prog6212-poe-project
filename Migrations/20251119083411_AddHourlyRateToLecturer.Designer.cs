@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ST10448420_CMCsystem.Data;
 
@@ -11,9 +12,11 @@ using ST10448420_CMCsystem.Data;
 namespace ST10448420_CMCsystem.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251119083411_AddHourlyRateToLecturer")]
+    partial class AddHourlyRateToLecturer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,19 +133,16 @@ namespace ST10448420_CMCsystem.Migrations
                     b.Property<DateTime>("ClaimSubmissionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("HourlyRate")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("HourlyRate")
+                        .HasColumnType("float");
 
                     b.Property<string>("LecturerID")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TotalHoursWorked")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalHoursWorked")
+                        .HasColumnType("float");
 
                     b.HasKey("ClaimID");
 
