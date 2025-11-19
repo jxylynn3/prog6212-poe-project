@@ -3,6 +3,8 @@
 
 <h2>Create New User</h2>
 
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <form asp-action="CreateUser">
 
     <label>Role</label>
@@ -15,30 +17,39 @@
 
     <label>First Name</label>
     <input asp-for="FirstName" class="form-control" />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
 
     <label>Last Name</label>
     <input asp-for="LastName" class="form-control" />
+    <span asp-validation-for="LastName" class="text-danger"></span>
 
     <label>Email</label>
     <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
 
     <label>Username</label>
     <input asp-for="Username" class="form-control" />
+    <span asp-validation-for="Username" class="text-danger"></span>
 
     <label>Password</label>
-    <input asp-for="Password" class="form-control" type="password" />
+    <input asp-for="Password" type="password" class="form-control" />
+    <span asp-validation-for="Password" class="text-danger"></span>
 
-    <!-- HOURLY RATE SECTION (hidden unless role == Lecturer) -->
+    <!-- Hourly Rate (lecturer only) -->
     <div id="hourlyRateSection" style="display:none;">
         <label>Hourly Rate</label>
         <input asp-for="HourlyRate" class="form-control" type="number" step="0.01" min="0" />
+        <span asp-validation-for="HourlyRate" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success mt-3">Create</button>
+
+    <a asp-controller="Dashboard" asp-action="HRDashboard" class="btn btn-secondary mt-2">
+        Back to Dashboard
+    </a>
 </form>
 
 <script>
-    // Dynamically show hourly rate for Lecturers solely
     const roleDropdown = document.getElementById("roleDropdown");
     const hourlyRateSection = document.getElementById("hourlyRateSection");
 

@@ -40,6 +40,7 @@ namespace ST10448420_CMCsystem.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
+            // Hourly rate restriction for lecturer
             if (vm.Role == "Lecturer" && vm.HourlyRate < 28.79m)
             {
                 ModelState.AddModelError("HourlyRate", "Hourly rate cannot be below R28.79.");
@@ -166,6 +167,14 @@ namespace ST10448420_CMCsystem.Controllers
             switch (role)
             {
                 case "Lecturer":
+                    // Validation BEFORE database update
+                    if (lecturer.HourlyRate < 28.79m)
+                    {
+                        ViewBag.Role = role;
+                        ModelState.AddModelError("HourlyRate", "Hourly rate cannot be below R28.79.");
+                        return View(lecturer);
+                    }
+
                     var lec = _db.Lecturer.FirstOrDefault(x => x.LecturerID == id);
                     if (lec != null)
                     {
@@ -173,6 +182,7 @@ namespace ST10448420_CMCsystem.Controllers
                         lec.LastName = lecturer.LastName;
                         lec.Email = lecturer.Email;
                         lec.Username = lecturer.Username;
+                        lec.HourlyRate = lecturer.HourlyRate;
                     }
                     break;
 

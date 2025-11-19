@@ -5,6 +5,9 @@
 
 <h2>Edit @role</h2>
 
+<!-- This shows ANY validation errors (like the hourly rate restriction) -->
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <form method="post">
     <input type="hidden" name="role" value="@role" />
     <input type="hidden" name="id" value="@Model.GetType().GetProperty(role + "ID")?.GetValue(Model)" />
@@ -20,6 +23,20 @@
 
     <label>Username</label>
     <input name="Username" class="form-control" value="@Model.Username" />
+
+    @if (role == "Lecturer")
+    {
+        <label>Hourly Rate</label>
+        <input name="HourlyRate"
+               class="form-control"
+               type="number"
+               min="0"
+               step="0.01"
+               value="@Model.HourlyRate" />
+
+        <!-- Error message for HourlyRate -->
+        <span class="text-danger">@Html.ValidationMessage("HourlyRate")</span>
+    }
 
     <button class="btn btn-primary mt-2">Save</button>
 </form>
