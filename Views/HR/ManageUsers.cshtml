@@ -22,15 +22,23 @@
                 <td>
                     <a asp-controller="HR" asp-action="UserDetails"
                        asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
-                       class="btn btn-info btn-sm">Details</a>
-
+                       class="btn btn-sm"
+                       style="background-color:#99686E; color:white; border:none;">
+                        Details
+                    </a>
                     <a asp-controller="HR" asp-action="EditUser"
                        asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
-                       class="btn btn-warning btn-sm">Edit</a>
-
+                       class="btn btn-sm"
+                       style="background-color:#DCAE96; color:white; border:none;">
+                        Edit
+                    </a>
                     <a asp-controller="HR" asp-action="DeleteUser"
                        asp-route-role="Lecturer" asp-route-id="@user.LecturerID"
-                       class="btn btn-danger btn-sm">Delete</a>
+                       class="btn btn-sm"
+                       style="background-color:#EECB86; color:white; border:none;">
+                        Delete
+                    </a>
+
                 </td>
             </tr>
         }
@@ -56,17 +64,28 @@
                 <td>@user.Email</td>
                 <td>@user.Username</td>
                 <td>
+
                     <a asp-controller="HR" asp-action="UserDetails"
                        asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
-                       class="btn btn-info btn-sm">Details</a>
+                       class="btn btn-sm"
+                       style="background-color:#99686E; color:white; border:none;">
+                        Details
+                    </a>
 
                     <a asp-controller="HR" asp-action="EditUser"
                        asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
-                       class="btn btn-warning btn-sm">Edit</a>
+                       class="btn btn-sm"
+                       style="background-color:#DCAE96; color:white; border:none;">
+                        Edit
+                    </a>
 
                     <a asp-controller="HR" asp-action="DeleteUser"
                        asp-route-role="ProgrammeCoordinator" asp-route-id="@user.CoordinatorID"
-                       class="btn btn-danger btn-sm">Delete</a>
+                       class="btn btn-sm"
+                       style="background-color:#EECB86; color:white; border:none;">
+                        Delete
+                    </a>
+
                 </td>
             </tr>
         }
@@ -92,19 +111,31 @@
                 <td>@user.Email</td>
                 <td>@user.Username</td>
                 <td>
+
                     <a asp-controller="HR" asp-action="UserDetails"
                        asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
-                       class="btn btn-info btn-sm">Details</a>
+                       class="btn btn-sm"
+                       style="background-color:#99686E; color:white; border:none;">
+                        Details
+                    </a>
 
                     <a asp-controller="HR" asp-action="EditUser"
                        asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
-                       class="btn btn-warning btn-sm">Edit</a>
+                       class="btn btn-sm"
+                       style="background-color:#DCAE96; color:white; border:none;">
+                        Edit
+                    </a>
 
                     <a asp-controller="HR" asp-action="DeleteUser"
                        asp-route-role="AcademicManager" asp-route-id="@user.AcademicManagerID"
-                       class="btn btn-danger btn-sm">Delete</a>
+                       class="btn btn-sm"
+                       style="background-color:#EECB86; color:white; border:none;">
+                        Delete
+                    </a>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
