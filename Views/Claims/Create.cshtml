@@ -45,7 +45,8 @@
 
         <div class="col">
             <label asp-for="HourlyRate"></label>
-            <input asp-for="HourlyRate" id="HourlyRate" class="form-control" type="number" step="0.01" />
+            <input asp-for="HourlyRate" id="HourlyRate" class="form-control" type="number" step="0.01" readonly />
+
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
 

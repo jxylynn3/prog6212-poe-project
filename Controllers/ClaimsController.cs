@@ -27,14 +27,19 @@ namespace ST10448420_CMCsystem.Controllers
 
             lecturerId = HttpContext.Session.UserID();
 
+            // fetch lecturer info
+            var lecturer = _db.Lecturer.FirstOrDefault(l => l.LecturerID == lecturerId);
+            if (lecturer == null)
+                return Unauthorized(); // shouldn't happen but safety
+
+            // pre-fill the VM
             var vm = new ClaimCreateViewModel
             {
-                LecturerID = lecturerId
+                LecturerID = lecturer.LecturerID,
+                LecturerName = $"{lecturer.FirstName} {lecturer.LastName}",
+                HourlyRate = lecturer.HourlyRate < 28.79m ? 28.79m : lecturer.HourlyRate, // enforce minimum
+                ClaimDate = DateTime.Today,
             };
-
-            var lecturer = _db.Lecturer.FirstOrDefault(l => l.LecturerID == lecturerId);
-            if (lecturer != null)
-                vm.LecturerName = $"{lecturer.FirstName} {lecturer.LastName}";
 
             return View(vm);
         }
