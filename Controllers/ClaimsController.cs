@@ -313,6 +313,51 @@ namespace ST10448420_CMCsystem.Controllers
 
             return RedirectToAction("ReviewClaimsPC");
         }
+        // Approve for Academic Manager
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveClaims(string id)
+        {
+            // Ensure only Academic Manager can call this
+            if (HttpContext.Session.UserRole() != "AcademicManager")
+                return Unauthorized();
+
+            if (string.IsNullOrEmpty(id))
+                return BadRequest();
+
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            // Update status and save
+            claim.ClaimStatus = "Approved by Academic Manager";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaims");
+        }
+
+        // Reject for Academic Manager
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectClaims(string id)
+        {
+            if (HttpContext.Session.UserRole() != "AcademicManager")
+                return Unauthorized();
+
+            if (string.IsNullOrEmpty(id))
+                return BadRequest();
+
+            var claim = await _db.Claims.FindAsync(id);
+            if (claim == null) return NotFound();
+
+            claim.ClaimStatus = "Rejected by Academic Manager";
+            _db.Update(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ReviewClaims");
+        }
+
+
         //the method below allows HR to view all claims in the system
         [HttpGet]
         public async Task<IActionResult> HRClaims()

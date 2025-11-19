@@ -17,6 +17,8 @@ namespace ST10448420_CMCsystem.Data
         public DbSet<Approval> Approvals { get; set; }
         //part 03
         public DbSet<HR> HR { get; set; }
+        public DbSet<Tracking> Tracking { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);//seed data for HR table
