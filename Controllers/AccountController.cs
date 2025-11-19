@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ST10448420_CMCsystem.Data;
 using ST10448420_CMCsystem.Models;
+using Microsoft.AspNetCore.Http;
+
 
 namespace ST10448420_CMCsystem.Controllers
 {
@@ -13,7 +15,7 @@ namespace ST10448420_CMCsystem.Controllers
             _db = db;
         }
 
-        // --- REGISTER ---
+        //the register method allows new users to create accounts by providing necessary details and selecting a role,this isnt used in part 03 of the poe
         [HttpGet]
         public IActionResult Register()
         {
@@ -22,7 +24,7 @@ namespace ST10448420_CMCsystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(UserAccountViewModel model)
+        public IActionResult Register(UserAccountViewModel model) //not used in part 03 of the poe
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -61,7 +63,7 @@ namespace ST10448420_CMCsystem.Controllers
                 return View(model);
             }
 
-            switch (model.Role)
+            switch (model.Role)// pre-part 03 poe registration only for Lecturer, Academic Manager and Programme Coordinator
             {
                 case "Lecturer":
                     var lecturer = new Lecturer
@@ -122,7 +124,7 @@ namespace ST10448420_CMCsystem.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//changes were made here to accomodate the 4 roles in the poe part 03
         public IActionResult Login(string username, string password, string role)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(role))
@@ -139,34 +141,54 @@ namespace ST10448420_CMCsystem.Controllers
                     var lecturer = _db.Lecturer.FirstOrDefault(x => x.Username == username && x.Password == password);
                     if (lecturer != null)
                     {
-                        // Store lecturer details for later
-                        TempData["LecturerID"] = lecturer.LecturerID;
-                        TempData["LecturerName"] = $"{lecturer.FirstName} {lecturer.LastName}";
+                        HttpContext.Session.SetString("UserID", lecturer.LecturerID);
+                        HttpContext.Session.SetString("UserRole", "Lecturer");
+                        HttpContext.Session.SetString("UserName", $"{lecturer.FirstName} {lecturer.LastName}");
+
                         return RedirectToAction("LecturerDashboard", "Dashboard", new { lecturerId = lecturer.LecturerID });
                     }
                     break;
 
+
                 case "AcademicManager":
-                    isValid = _db.AcademicManager.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("AcademicManagerDashboard", "Dashboard", new { username = username });
+                    var manager = _db.AcademicManager.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    if (manager != null)
+                    {
+                        HttpContext.Session.SetString("UserID", manager.AcademicManagerID);
+                        HttpContext.Session.SetString("UserRole", "AcademicManager");
+                        HttpContext.Session.SetString("UserName", $"{manager.FirstName} {manager.LastName}");
+
+                        return RedirectToAction("AcademicManagerDashboard", "Dashboard");
+                    }
                     break;
 
+
                 case "ProgrammeCoordinator":
-                    isValid = _db.ProgrammeCoordinator.Any(x => x.Username == username && x.Password == password);
-                    if (isValid) return RedirectToAction("ProgrammeCoordinatorDashboard", "Dashboard", new { username = username });
+                    var pc = _db.ProgrammeCoordinator.FirstOrDefault(x => x.Username == username && x.Password == password);
+                    if (pc != null)
+                    {
+                        HttpContext.Session.SetString("UserID", pc.CoordinatorID);
+                        HttpContext.Session.SetString("UserRole", "ProgrammeCoordinator");
+                        HttpContext.Session.SetString("UserName", $"{pc.FirstName} {pc.LastName}");
+
+                        return RedirectToAction("ProgrammeCoordinatorDashboard", "Dashboard");
+                    }
                     break;
-                //Case for HR role can be added here in future
+                // the addition of the HR role login functionality,that is now used to authenticate HR users,and create other users
                 case "HR":
                     var hr = _db.HR.FirstOrDefault(x => x.Username == username && x.Password == password);
                     if (hr != null)
                     {
-                        TempData["HRID"] = hr.HRID;
-                        TempData["HRName"] = $"{hr.FirstName} {hr.Surname}";
+                        HttpContext.Session.SetString("UserID", hr.HRID);//
+                        HttpContext.Session.SetString("UserRole", "HR");
+                        HttpContext.Session.SetString("UserName", $"{hr.FirstName} {hr.Surname}");
+
                         return RedirectToAction("HRDashboard", "Dashboard");
                     }
                     break;
 
-                default:
+
+                default: //the default case is used to handle any unknown roles that do not match the predefined ones
                     ViewBag.Error = "Unknown role.";
                     return View();
             }
@@ -174,5 +196,11 @@ namespace ST10448420_CMCsystem.Controllers
             ViewBag.Error = "Invalid username, password, or role.";
             return View();
         }
+        public IActionResult Logout()//the purpose of this method is to log out the user by clearing their session data and redirecting them to the login page
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
+
     }
 }

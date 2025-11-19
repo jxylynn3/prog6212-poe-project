@@ -3,98 +3,67 @@ using Microsoft.EntityFrameworkCore;
 using ST10448420_CMCsystem.Data;
 using ST10448420_CMCsystem.Models;
 using ST10448420_CMCsystem.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using ST10448420_CMCsystem.Helpers;
 
 namespace ST10448420_CMCsystem.Controllers
 {
     public class ClaimsController : Controller
     {
-    private readonly AppDBContext _db;
-    private readonly IWebHostEnvironment _webHost;
+        private readonly AppDBContext _db;
+        private readonly IWebHostEnvironment _webHost;//dependency injection for web host environment
 
-    public ClaimsController(AppDBContext context, IWebHostEnvironment env)
-    {
-        _db = context;
-        _webHost = env;
-    }
-
-        // GET: Create claim form
-        [HttpGet]
-        public IActionResult Create(string lecturerId)
+        public ClaimsController(AppDBContext context, IWebHostEnvironment env)
         {
-            lecturerId ??= TempData["LecturerID"]?.ToString();
+            _db = context;
+            _webHost = env;//initialize the web host environment,for file uploads usage
+        }
+
+        [HttpGet]
+        public IActionResult Create(string lecturerId)//this method allows lecturers to create new claims(edits were made for part 03)
+        {
+            if (HttpContext.Session.UserRole() != "Lecturer")
+                return RedirectToAction("Login", "Account");
+
+            lecturerId = HttpContext.Session.UserID();
 
             var vm = new ClaimCreateViewModel
             {
-                //ClaimID = Guid.NewGuid().ToString().Substring(0, 10),
-                LecturerID = lecturerId ?? "",
+                LecturerID = lecturerId
             };
 
-            if (!string.IsNullOrEmpty(lecturerId))
-            {
-                var lec = _db.Lecturer.FirstOrDefault(l => l.LecturerID == lecturerId);
-                if (lec != null)
-                {
-                    vm.LecturerName = $"{lec.FirstName} {lec.LastName}";
-                }
-            }
+            var lecturer = _db.Lecturer.FirstOrDefault(l => l.LecturerID == lecturerId);
+            if (lecturer != null)
+                vm.LecturerName = $"{lecturer.FirstName} {lecturer.LastName}";
 
             return View(vm);
         }
-        // the purpose of this commented-out code is to test routing only,i wasnt done with the complete implementation
-        //public IActionResult Create(string lecturerId)
-        //{
-        //    return Content($"Create action hit with lecturerId={lecturerId}");
-        //}
 
-        // POST: submit completed claim
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ClaimCreateViewModel vm)
         {
+            if (HttpContext.Session.UserRole() != "Lecturer")
+                return RedirectToAction("Login", "Account");
+
+            vm.LecturerID = HttpContext.Session.UserID();
+
             if (string.IsNullOrEmpty(vm.ClaimID))
-            {
                 vm.ClaimID = "CLM" + Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
-            }
 
             ModelState.Remove(nameof(vm.ClaimID));
 
             if (!ModelState.IsValid)
-            {
-                var errors = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
-                Console.WriteLine("ModelState invalid: " + errors);
                 return View(vm);
-            }
 
-            //this allows us to validate the total hours worked field to ensure it falls within the specified range
             if (vm.TotalHoursWorked < 5 || vm.TotalHoursWorked > 195)
             {
-                ModelState.AddModelError("TotalHoursWorked", "Total hours must be between 5 and 195 hours per month.");
+                ModelState.AddModelError("TotalHoursWorked", "Total hours must be between 5 and 195.");
                 return View(vm);
             }
 
-            // optional: ensure lecturer exists
-            if (string.IsNullOrEmpty(vm.LecturerID))
-            {
-                vm.LecturerID = TempData["LecturerID"]?.ToString();
-            }
-
-            if (string.IsNullOrEmpty(vm.LecturerName))
-            {
-                var lec = _db.Lecturer.FirstOrDefault(l => l.LecturerID == vm.LecturerID);
-                if (lec != null)
-                {
-                    vm.LecturerName = $"{lec.FirstName} {lec.LastName}";
-                }
-            }
-
-            // fetch lecturer to get hourly rate
             var lecturer = _db.Lecturer.First(l => l.LecturerID == vm.LecturerID);
-
-            decimal hourlyRate = lecturer.HourlyRate;
-
-            // Minimum enforcement
-            if (hourlyRate < 28.79m)
-                hourlyRate = 28.79m;
+            decimal hourlyRate = lecturer.HourlyRate < 28.79m ? 28.79m : lecturer.HourlyRate;
 
             var claim = new Claims
             {
@@ -103,104 +72,95 @@ namespace ST10448420_CMCsystem.Controllers
                 ClaimName = vm.ClaimName,
                 ClaimDescription = vm.ClaimDescription,
                 ClaimDate = vm.ClaimDate,
-
-                TotalHoursWorked = vm.TotalHoursWorked, // double 
-                HourlyRate = hourlyRate,                // decimal
-
-                // TOTAL AMOUNT MUST BE DECIMAL × DOUBLE -> CAST THE DOUBLE
+                TotalHoursWorked = vm.TotalHoursWorked,
+                HourlyRate = hourlyRate,
                 TotalAmount = hourlyRate * (decimal)vm.TotalHoursWorked,
-
                 ClaimStatus = "Pending",
                 ClaimSubmissionDate = DateTime.Now
             };
 
-
             _db.Claims.Add(claim);
             _db.SaveChanges();
-            Console.WriteLine($"Claim saved: {claim.ClaimID}");
 
-            // persisted uploaded files  
-            if (vm.UploadedFiles != null && vm.UploadedFiles.Any())
+            if (vm.UploadedFiles != null)
             {
                 foreach (var f in vm.UploadedFiles)
                 {
-                    var doc = new SupportingDocx
+                    _db.SupportingDocument.Add(new SupportingDocx
                     {
-                        DocumentID = string.IsNullOrEmpty(f.DocumentID) ? Guid.NewGuid().ToString().Substring(0, 10) : f.DocumentID,
+                        DocumentID = Guid.NewGuid().ToString().Substring(0, 10),
                         ClaimID = claim.ClaimID,
                         FileName = f.FileName,
                         FilePath = f.FilePath,
                         UploadedDate = DateTime.Now
-                    };
-                    _db.SupportingDocument.Add(doc);
+                    });
                 }
                 _db.SaveChanges();
             }
 
-            return RedirectToAction("List", new { lecturerId = vm.LecturerID });
+            return RedirectToAction("List");
         }
-        // I redirect to Claims.List so user sees the new claim immediately in My Claims
-
-
-        // AJAX: upload file and immediately save it to server & return JSON info
         [HttpPost]
         public async Task<IActionResult> UploadDocument([FromForm] string claimId, [FromForm] IFormFile file)
         {
+            // Validate file presence
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
 
+            // Allowed formats
             var allowed = new[] { ".pdf", ".docx", ".doc", ".png", ".jpg", ".jpeg" };
             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
 
             if (!allowed.Contains(ext))
                 return BadRequest("File type not allowed.");
 
+            // File size limit
             if (file.Length > 10 * 1024 * 1024)
                 return BadRequest("File too large.");
 
-            // Handle missing claimId gracefully
+            // If no claim exists yet, assign temporary ID
+            // Fix added because Sessions removed TempData flow
             if (string.IsNullOrEmpty(claimId))
             {
-                claimId = "temp_" + Guid.NewGuid().ToString("N").Substring(0, 6);
+                claimId = "TEMP_" + Guid.NewGuid().ToString("N").Substring(0, 8);
             }
 
-            // Directory: wwwroot/uploads/{claimId}
+            // Directory where files will be stored
             var uploadsRoot = Path.Combine(_webHost.WebRootPath, "uploads", claimId);
+
+            // Ensure the directory exists
             if (!Directory.Exists(uploadsRoot))
                 Directory.CreateDirectory(uploadsRoot);
 
-            var fileName = Path.GetFileName(file.FileName);
-            var uniqueName = $"{Guid.NewGuid().ToString().Substring(0, 8)}_{fileName}";
+            var uniqueName = $"{Guid.NewGuid().ToString().Substring(0, 8)}_{file.FileName}";
             var filePath = Path.Combine(uploadsRoot, uniqueName);
 
+            // Save file to server
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
+            // Public path for front-end
             var publicPath = $"/uploads/{claimId}/{uniqueName}";
 
-            // Return file metadata to client
+            // Return JSON to the AJAX caller
             return Json(new
             {
                 success = true,
                 documentId = Guid.NewGuid().ToString().Substring(0, 10),
-                fileName = fileName,
+                fileName = file.FileName,
                 filePath = publicPath,
-                claimId = claimId //include this so front-end can store it for later
+                claimId = claimId
             });
         }
 
-
-        // GET: Claims/List?lecturerId=L001
-        public async Task<IActionResult> List(string lecturerId)
+        public async Task<IActionResult> List()//this method allows lecturers to view all their submitted claims,indivdualised to the lecturer account
         {
-            if (string.IsNullOrEmpty(lecturerId))
-            {
-                lecturerId = "L001"; // fallback
-            }
+            if (HttpContext.Session.UserRole() != "Lecturer")
+                return RedirectToAction("Login", "Account");
 
-            ViewBag.LecturerID = lecturerId;
+            var lecturerId = HttpContext.Session.UserID();
 
             var claims = await _db.Claims
                 .Where(c => c.LecturerID == lecturerId)
@@ -208,13 +168,77 @@ namespace ST10448420_CMCsystem.Controllers
                 .ToListAsync();
 
             return View(claims);
-
         }
-        //everything below focuses on the the approval/rejection process used by academic mangers
+
         [HttpGet]
-        //views all pending claims for academic manager to review
-        public async Task<IActionResult> ReviewClaims()
+        public async Task<IActionResult> ClaimDetails(string id, string from)
+        //the use of FROM: helps to identify where the user navigated from,allowing for context-aware rendering or navigation options in the view.
         {
+            if (HttpContext.Session.UserRole() == null)
+                return RedirectToAction("Login", "Account");
+
+            var claim = await _db.Claims
+                .Include(c => c.Lecturer)
+                .Include(c => c.SupportingDocuments)
+                .FirstOrDefaultAsync(c => c.ClaimID == id);
+
+            if (claim == null)
+                return NotFound();
+
+            ViewBag.FromPage = from;
+            return View("~/Views/Claims/ClaimDetails.cshtml", claim);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ClaimDetailsPC(string id)
+        {
+            // Only Programme Coordinator may access this endpoint,access control
+            if (HttpContext.Session.UserRole() != "ProgrammeCoordinator")
+                return RedirectToAction("Login", "Account");
+
+            if (id == null)
+                return NotFound();
+
+            var claim = await _db.Claims
+                .Include(c => c.Lecturer)
+                .Include(c => c.SupportingDocuments)
+                .FirstOrDefaultAsync(c => c.ClaimID == id);
+
+            if (claim == null)
+                return NotFound();
+
+            // The PC view expects the claim model
+            return View("~/Views/Claims/ClaimDetailsPC.cshtml", claim);
+        }
+
+        // this method allows lecturers to trace their claims,by viewing all their submitted claims
+        [HttpGet]
+        public async Task<IActionResult> TraceClaims()
+        {
+            // Enforce only lecturers can view trace,this is the access control,highlighted in the checklist
+            if (HttpContext.Session.UserRole() != "Lecturer")
+                return RedirectToAction("Login", "Account");
+
+            var lecturerId = HttpContext.Session.UserID();
+
+            // If the session somehow has no ID, force logout,this is a form of error handling.it ensures that only authenticated lecturers can access their claims
+            if (string.IsNullOrEmpty(lecturerId))
+                return RedirectToAction("Logout", "Account");
+
+            var claims = await _db.Claims
+                .Where(c => c.LecturerID == lecturerId)
+                .OrderByDescending(c => c.ClaimDate)
+                .ToListAsync();
+
+            return View("~/Views/Claims/TraceClaims.cshtml", claims);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReviewClaims()//used by academic manager to review claims,for the workflow of approving or rejecting claims
+        {
+            if (HttpContext.Session.UserRole() != "AcademicManager")
+                return Unauthorized();
+
             var allClaims = await _db.Claims
                 .Include(c => c.Lecturer)
                 .ToListAsync();
@@ -229,99 +253,34 @@ namespace ST10448420_CMCsystem.Controllers
 
             return View("~/Views/Dashboard/AcademicManagerDashboard.cshtml", viewModel);
         }
-        //allows for a detailed view of a specific claim
-        [HttpGet]
-        public async Task<IActionResult> ClaimDetails(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var claim = await _db.Claims
-                .Include(c => c.Lecturer)
-                .Include(c => c.SupportingDocuments)
-                .FirstOrDefaultAsync(c => c.ClaimID == id);
-
-            if (claim == null)
-                return NotFound();
-
-            return View("~/Views/Claims/ClaimDetails.cshtml", claim);
-        }
-        [HttpPost]
-        public async Task<IActionResult> ApproveClaims(string id)
-        {
-            var claim = await _db.Claims.FindAsync(id);
-            if (claim == null) return NotFound();
-
-            // If it's coming from PC approval, this is final
-            if (claim.ClaimStatus == "Approved by Programme Coordinator")
-                claim.ClaimStatus = "Approved by Academic Manager";
-            else
-                claim.ClaimStatus = "Approved";
-
-            _db.Update(claim);
-            await _db.SaveChangesAsync();
-
-            return RedirectToAction("ReviewClaims");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RejectClaims(string id)
-        {
-            var claim = await _db.Claims.FindAsync(id);
-            if (claim == null) return NotFound();
-
-            // Differentiate who rejected
-            if (claim.ClaimStatus == "Approved by Programme Coordinator")
-                claim.ClaimStatus = "Rejected by Academic Manager";
-            else
-                claim.ClaimStatus = "Rejected";
-
-            _db.Update(claim);
-            await _db.SaveChangesAsync();
-
-            return RedirectToAction("ReviewClaims");
-        }
-
-        //everything below focuses on the approval/rejection process used by Programme Coordinators
 
         [HttpGet]
-        public async Task<IActionResult> ReviewClaimsPC()
+        public async Task<IActionResult> ReviewClaimsPC()//used by programme coordinator to review claims,for the workflow of approving or rejecting claims
         {
-            var allClaims = await _db.Claims
+            if (HttpContext.Session.UserRole() != "ProgrammeCoordinator")
+                return Unauthorized();
+
+            var claims = await _db.Claims
                 .Include(c => c.Lecturer)
                 .ToListAsync();
 
-            var viewModel = new ClaimsDashboardViewModel
+            var vm = new ClaimsDashboardViewModel
             {
-                PendingClaims = allClaims.Where(c => c.ClaimStatus == "Pending").ToList(),
-                ApprovedClaims = allClaims.Where(c => c.ClaimStatus == "Approved by Programme Coordinator").ToList(),
-                RejectedClaims = allClaims.Where(c => c.ClaimStatus == "Rejected by Programme Coordinator").ToList()
-
+                PendingClaims = claims.Where(c => c.ClaimStatus == "Pending").ToList(),
+                ApprovedClaims = claims.Where(c => c.ClaimStatus == "Approved by Programme Coordinator").ToList(),
+                RejectedClaims = claims.Where(c => c.ClaimStatus == "Rejected by Programme Coordinator").ToList(),
             };
 
-            return View("~/Views/Dashboard/ProgrammeCoordinatorDashboard.cshtml", viewModel);
+            return View("~/Views/Dashboard/ProgrammeCoordinatorDashboard.cshtml", vm);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> ClaimDetailsPC(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var claim = await _db.Claims
-                .Include(c => c.Lecturer)
-                .Include(c => c.SupportingDocuments)
-                .FirstOrDefaultAsync(c => c.ClaimID == id);
-
-            if (claim == null)
-                return NotFound();
-
-            return View("~/Views/Claims/ClaimDetailsPC.cshtml", claim);
-        }
-
+        // Approve for Programme Coordinator
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ApproveClaimsPC(string id)
         {
+            if (HttpContext.Session.UserRole() != "ProgrammeCoordinator")
+                return Unauthorized();
+
             var claim = await _db.Claims.FindAsync(id);
             if (claim == null) return NotFound();
 
@@ -332,9 +291,14 @@ namespace ST10448420_CMCsystem.Controllers
             return RedirectToAction("ReviewClaimsPC");
         }
 
+        // Reject for Programme Coordinator
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RejectClaimsPC(string id)
         {
+            if (HttpContext.Session.UserRole() != "ProgrammeCoordinator")
+                return Unauthorized();
+
             var claim = await _db.Claims.FindAsync(id);
             if (claim == null) return NotFound();
 
@@ -344,22 +308,41 @@ namespace ST10448420_CMCsystem.Controllers
 
             return RedirectToAction("ReviewClaimsPC");
         }
-        //this action allows lecturers to trace their claims,so that they can see the status of their submissions
+        //the method below allows HR to view all claims in the system
         [HttpGet]
-        public async Task<IActionResult> TraceClaims(string lecturerId)
+        public async Task<IActionResult> HRClaims()
         {
-            if (string.IsNullOrEmpty(lecturerId))
-            {
-                lecturerId = "L001"; // fallback or grab from session
-            }
+            if (HttpContext.Session.UserRole() != "HR")
+                return RedirectToAction("Login", "Account");//this checks if the user is HR
 
             var claims = await _db.Claims
-                .Where(c => c.LecturerID == lecturerId)
-                .OrderByDescending(c => c.ClaimDate)
+                .Include(c => c.Lecturer)
+                .OrderByDescending(c => c.ClaimSubmissionDate)
                 .ToListAsync();
 
-            return View("~/Views/Claims/TraceClaims.cshtml", claims);
+            return View("~/Views/HR/HRClaims.cshtml", claims);
         }
+        //part 03
+        [HttpPost]
+        public async Task<IActionResult> DeleteClaim(string id)
+        {
+            if (HttpContext.Session.UserRole() != "HR")
+                return Unauthorized();
 
+            var claim = await _db.Claims
+                .Include(c => c.SupportingDocuments)
+                .FirstOrDefaultAsync(c => c.ClaimID == id);
+
+            if (claim == null)
+                return NotFound();
+
+            if (claim.SupportingDocuments != null)
+                _db.SupportingDocument.RemoveRange(claim.SupportingDocuments);
+
+            _db.Claims.Remove(claim);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("HRClaims");
+        }
     }
 }

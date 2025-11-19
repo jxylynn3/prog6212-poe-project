@@ -2,41 +2,50 @@
 using ST10448420_CMCsystem.Data;
 using ST10448420_CMCsystem.Models;
 using ST10448420_CMCsystem.Models.ViewModels;
+using ST10448420_CMCsystem.Helpers;
 
 namespace ST10448420_CMCsystem.Controllers
 {
-
     public class HRController : Controller
     {
-
         private readonly AppDBContext _db;
 
-        public HRController(AppDBContext db)
+        public HRController(AppDBContext db)//property injection of the DB context
         {
             _db = db;
+        }
+
+        private bool IsHR()
+        {
+            //this boolean method checks if the current user is an HR,its purpose is to make the restriction of certain actions to HR users only easier
+            return HttpContext.Session.UserRole() == "HR";//gets called alot in the methods below
         }
 
         [HttpGet]
         public IActionResult CreateUser()
         {
+            //CRUD functionality for creating new users in the system,solely used by the HR
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateUser(HRUserCreationViewModel vm)
-        { 
-       
-        if (!ModelState.IsValid)
+        {
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
+            if (!ModelState.IsValid)
                 return View(vm);
-            if (vm.Role == "Lecturer")
-            { 
-            if (vm.HourlyRate < 28.79m)
-                {
-                    ModelState.AddModelError("HourlyRate", "Hourly rate cannot be less than the government minimum of R28.79.");
-                    return View(vm);
-                }
+
+            if (vm.Role == "Lecturer" && vm.HourlyRate < 28.79m)
+            {
+                ModelState.AddModelError("HourlyRate", "Hourly rate cannot be below R28.79.");
+                return View(vm);
             }
-            //the switch is used to determine which type of user to create based on the selected role
+
             switch (vm.Role)
             {
                 case "Lecturer":
@@ -77,7 +86,7 @@ namespace ST10448420_CMCsystem.Controllers
                     break;
 
                 default:
-                    ModelState.AddModelError("", "Invalid role selected");
+                    ModelState.AddModelError("", "Invalid role selected.");
                     return View(vm);
             }
 
@@ -85,19 +94,25 @@ namespace ST10448420_CMCsystem.Controllers
             TempData["Success"] = "User created successfully!";
             return RedirectToAction("HRDashboard", "Dashboard");
         }
+
         [HttpGet]
-        public IActionResult ManageUsers()// this method retrieves all users from the database and displays them in the HR user management view
-        { 
-        var vm = new HRUserManagementViewModel
+        public IActionResult ManageUsers()
+        {
+            //solely used by the HR to manage users in the system
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
+            var vm = new HRUserManagementViewModel
             {
                 Lecturers = _db.Lecturer.ToList(),
                 AcademicManagers = _db.AcademicManager.ToList(),
                 ProgrammeCoordinators = _db.ProgrammeCoordinator.ToList()
             };
+
             return View(vm);
         }
 
-        //An object is a instance of a class. It is created using the new keyword followed by the class constructor.
+        //this is a helper method to get user by role and id
         private object GetUserByRole(string role, string id)
         {
             return role switch
@@ -108,9 +123,15 @@ namespace ST10448420_CMCsystem.Controllers
                 _ => null
             };
         }
+
+
         [HttpGet]
         public IActionResult UserDetails(string role, string id)
+        //a method that displays user details based on their role and id
         {
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             var user = GetUserByRole(role, id);
             if (user == null)
                 return NotFound();
@@ -118,11 +139,18 @@ namespace ST10448420_CMCsystem.Controllers
             ViewBag.Role = role;
             return View(user);
         }
+
+
         [HttpGet]
         public IActionResult EditUser(string role, string id)
         {
+            //CRUD functionality for editing user details based on their role and id.This is the GET method tho
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             var user = GetUserByRole(role, id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return NotFound();
 
             ViewBag.Role = role;
             return View(user);
@@ -131,6 +159,10 @@ namespace ST10448420_CMCsystem.Controllers
         [HttpPost]
         public IActionResult EditUser(string role, string id, Lecturer lecturer, ProgrammeCoordinator coordinator, AcademicManager manager)
         {
+            //the POST method is used to save the changes made to the user details to the DB
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             switch (role)
             {
                 case "Lecturer":
@@ -145,24 +177,24 @@ namespace ST10448420_CMCsystem.Controllers
                     break;
 
                 case "ProgrammeCoordinator":
-                    var c = _db.ProgrammeCoordinator.FirstOrDefault(x => x.CoordinatorID == id);
-                    if (c != null)
+                    var pc = _db.ProgrammeCoordinator.FirstOrDefault(x => x.CoordinatorID == id);
+                    if (pc != null)
                     {
-                        c.FirstName = coordinator.FirstName;
-                        c.LastName = coordinator.LastName;
-                        c.Email = coordinator.Email;
-                        c.Username = coordinator.Username;
+                        pc.FirstName = coordinator.FirstName;
+                        pc.LastName = coordinator.LastName;
+                        pc.Email = coordinator.Email;
+                        pc.Username = coordinator.Username;
                     }
                     break;
 
                 case "AcademicManager":
-                    var m = _db.AcademicManager.FirstOrDefault(x => x.AcademicManagerID == id);
-                    if (m != null)
+                    var am = _db.AcademicManager.FirstOrDefault(x => x.AcademicManagerID == id);
+                    if (am != null)
                     {
-                        m.FirstName = manager.FirstName;
-                        m.LastName = manager.LastName;
-                        m.Email = manager.Email;
-                        m.Username = manager.Username;
+                        am.FirstName = manager.FirstName;
+                        am.LastName = manager.LastName;
+                        am.Email = manager.Email;
+                        am.Username = manager.Username;
                     }
                     break;
             }
@@ -170,11 +202,18 @@ namespace ST10448420_CMCsystem.Controllers
             _db.SaveChanges();
             return RedirectToAction("ManageUsers");
         }
+
+
         [HttpGet]
         public IActionResult DeleteUser(string role, string id)
         {
+            //CRUD functionality for deleting a user based on their role and id
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             var user = GetUserByRole(role, id);
-            if (user == null) return NotFound();
+            if (user == null)
+                return NotFound();
 
             ViewBag.Role = role;
             ViewBag.Id = id;
@@ -184,6 +223,9 @@ namespace ST10448420_CMCsystem.Controllers
         [HttpPost]
         public IActionResult DeleteUserConfirmed(string role, string id)
         {
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
             switch (role)
             {
                 case "Lecturer":
@@ -197,14 +239,13 @@ namespace ST10448420_CMCsystem.Controllers
                     break;
 
                 case "AcademicManager":
-                    var m = _db.AcademicManager.FirstOrDefault(x => x.AcademicManagerID == id);
-                    if (m != null) _db.AcademicManager.Remove(m);
+                    var am = _db.AcademicManager.FirstOrDefault(x => x.AcademicManagerID == id);
+                    if (am != null) _db.AcademicManager.Remove(am);
                     break;
             }
 
             _db.SaveChanges();
             return RedirectToAction("ManageUsers");
         }
-
     }
 }

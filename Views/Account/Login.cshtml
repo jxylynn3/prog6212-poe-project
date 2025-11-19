@@ -15,11 +15,40 @@
             height: 100vh;
             margin: 0;
         }
+
+        .close-btn {
+            font-size: 28px;
+            text-decoration: none;
+            color: #344628;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: 0.2s ease;
+        }
+
+            .close-btn:hover {
+                color: #28371f;
+                transform: scale(1.1);
+            }
     </style>
 </head>
 <body>
+
+    <!-- HR Close Button -->
+    @if (ViewBag.FromPage == "HR")
+    {
+        <div class="text-end p-3">
+            <a asp-controller="HR"
+               asp-action="HRClaims"
+               class="close-btn">
+                ✖
+            </a>
+        </div>
+    }
+
     <div class="container-fluid vh-100 d-flex align-items-center justify-content-end">
         <div class="col-md-4 p-5 bg-white bg-opacity-75 rounded shadow me-5">
+
             @if (TempData["RegisterSuccess"] != null)
             {
                 <div class="alert alert-success">@TempData["RegisterSuccess"]</div>
@@ -27,14 +56,17 @@
 
             <form asp-action="Login" method="post">
                 @Html.AntiForgeryToken()
+
                 <div class="mb-3">
                     <label>Username</label>
                     <input name="username" class="form-control" />
                 </div>
+
                 <div class="mb-3">
                     <label>Password</label>
                     <input name="password" type="password" class="form-control" />
                 </div>
+
                 <div class="mb-3">
                     <label>Role</label>
                     <select name="role" class="form-control">
@@ -42,11 +74,14 @@
                         <option value="AcademicManager">Academic Manager</option>
                         <option value="ProgrammeCoordinator">Programme Coordinator</option>
                         <option value="HR">HR (Super User)</option>
-
                     </select>
                 </div>
 
-                <button type="submit" class="btn w-100 mt-2" style="background-color: #344628; border: none; color: #F7F7F7; font-weight: 500;">Login</button>
+                <button type="submit"
+                        class="btn w-100 mt-2"
+                        style="background-color: #344628; border: none; color: #F7F7F7; font-weight: 500;">
+                    Login
+                </button>
 
                 @if (ViewBag.Error != null)
                 {

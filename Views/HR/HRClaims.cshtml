@@ -1,0 +1,182 @@
+﻿@model IEnumerable<ST10448420_CMCsystem.Models.Claims>
+
+@{
+    ViewData["Title"] = "HR – All Claims Overview";
+}
+
+<div class="container mt-4">
+
+    <h2 class="page-title text-center mb-4">HR – All Claims Overview</h2>
+
+    <!-- Back Button -->
+    <div class="mb-4 text-center">
+        <a asp-controller="Dashboard"
+           asp-action="HRDashboard"
+           class="btn-sage-green">
+             Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-container text-center mb-4">
+        <span class="legend-item"><span class="legend-color" style="background-color:#C9CBA3;"></span> Pending</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#FFE1A8;"></span> Approved by Coordinator</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#E26D5C;"></span> Rejected by Coordinator</span>
+        <span class="legend-item"><span class="legend-color" style="background-color:#723D46;"></span> Final Approval / Rejection</span>
+    </div>
+
+    <div class="claims-container">
+        @foreach (var claim in Model)
+        {
+            <!-- Inline status logic WITHOUT @{ } -->
+            string statusClass = claim.ClaimStatus == "Pending" ? "bg-pending" :
+            claim.ClaimStatus == "Approved by Programme Coordinator" ? "bg-approved" :
+            claim.ClaimStatus == "Rejected by Programme Coordinator" ? "bg-rejected" :
+            claim.ClaimStatus == "Approved by Academic Manager" ? "bg-final" :
+            claim.ClaimStatus == "Rejected by Academic Manager" ? "bg-final" :
+            "bg-pending";
+
+            <div class="claim-card">
+                <h4 class="text-dark-green fw-bold">@claim.ClaimName</h4>
+
+                <p><strong>Claim ID:</strong> @claim.ClaimID</p>
+                <p><strong>Lecturer:</strong> @claim.Lecturer?.FirstName @claim.Lecturer?.LastName</p>
+                <p><strong>Total Amount:</strong> R @claim.TotalAmount</p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="badge px-3 py-2 rounded-pill @statusClass">
+                        @claim.ClaimStatus
+                    </span>
+                </p>
+
+                <p class="date">
+                    Submitted: @claim.ClaimSubmissionDate.ToString("dd MMM yyyy")
+                </p>
+
+                <a asp-action="ClaimDetails"
+                   asp-route-id="@claim.ClaimID"
+                   class="details-btn">
+                    View Details
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f9faf8;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .page-title {
+        color: #344628;
+        font-weight: 700;
+    }
+
+    /* Buttons */
+    .btn-sage-green {
+        background-color: #98a58e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-sage-green:hover {
+            background-color: #87967d;
+            transform: translateY(-2px);
+        }
+
+    /* Legend */
+    .legend-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        font-size: 0.9rem;
+        color: #344628;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .legend-color {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid #ccc;
+    }
+
+    /* Cards */
+    .claims-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+    }
+
+    .claim-card {
+        background: #ffffffcc;
+        padding: 20px;
+        border-radius: 16px;
+        border: 2px solid #e7ebe3;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+        .claim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+        }
+
+    .text-dark-green {
+        color: #344628;
+    }
+
+    /* STATUS COLOURS (matching palette) */
+    .bg-pending {
+        background-color: #C9CBA3 !important;
+        color: #344628;
+    }
+
+    .bg-approved {
+        background-color: #FFE1A8 !important;
+        color: #344628;
+    }
+
+    .bg-rejected {
+        background-color: #E26D5C !important;
+        color: white;
+    }
+
+    .bg-final {
+        background-color: #723D46 !important;
+        color: white;
+    }
+
+    .details-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #344628;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: .2s ease;
+    }
+
+        .details-btn:hover {
+            background-color: #28371f;
+        }
+
+    .date {
+        color: #666;
+        margin-top: 5px;
+    }
+</style>
