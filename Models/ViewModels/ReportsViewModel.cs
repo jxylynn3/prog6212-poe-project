@@ -1,6 +1,6 @@
 ﻿namespace ST10448420_CMCsystem.Models.ViewModels
 {
-    public class ReportsViewModel
+    public class ReportsViewModel//the purpose of this view model is to gather the data needed for generating reports on claim statuses.
     {
         public int Pending { get; set; }
         public int ReReview { get; set; }

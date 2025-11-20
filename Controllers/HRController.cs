@@ -48,7 +48,7 @@ namespace ST10448420_CMCsystem.Controllers
                 ModelState.AddModelError("HourlyRate", "Hourly rate cannot be below R28.79.");
                 return View(vm);
             }
-
+            //this Switch case handles the creation of different user roles based on the selected role in the view model
             switch (vm.Role)
             {
                 case "Lecturer":
@@ -60,7 +60,7 @@ namespace ST10448420_CMCsystem.Controllers
                         Email = vm.Email,
                         Username = vm.Username,
                         Password = vm.Password,
-                        HourlyRate = vm.HourlyRate
+                        HourlyRate = vm.HourlyRate//only needed for lecturers
                     });
                     break;
 
@@ -282,7 +282,7 @@ namespace ST10448420_CMCsystem.Controllers
         {
             if (!IsHR())
                 return RedirectToAction("Login", "Account");
-
+            //this method generates a PDF report for HR users using iTextSharp library
             var vm = new ReportsViewModel
             {
                 Pending = _db.Claims.Count(c => c.ClaimStatus == "Pending"),
@@ -294,10 +294,10 @@ namespace ST10448420_CMCsystem.Controllers
 
             using (var ms = new MemoryStream())
             {
-                var doc = new iTextSharp.text.Document();
+                var doc = new iTextSharp.text.Document();//how does the ITextSharp library work?--> it provides a set of classes and methods to create and manipulate PDF documents programmatically.
                 PdfWriter.GetInstance(doc, ms);
                 doc.Open();
-
+                //this shows the structure that the pdf will have
                 doc.Add(new Paragraph("CMC System – HR Claims Report"));
                 doc.Add(new Paragraph("-----------------------------------------"));
                 doc.Add(new Paragraph($"Generated On: {vm.GeneratedOn}"));
