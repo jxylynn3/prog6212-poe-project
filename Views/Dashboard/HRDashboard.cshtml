@@ -1,12 +1,61 @@
-﻿<h2>HR Dashboard</h2>
+﻿<h2 class="mb-4" style="color:#344628; font-weight:700;">HR Dashboard</h2>
 
-<a class="btn btn-primary" asp-controller="HR" asp-action="CreateUser">
-    Create New User
-</a>
+<div class="row">
 
-<a class="btn btn-secondary" asp-controller="HR" asp-action="ManageUsers">
-    Manage Existing Users
-</a>
-<a class="btn btn-primary" asp-controller="Claims" asp-action="HRClaims">
-    HR Claims Overview
-</a>
+    <!-- Create User -->
+    <div class="col-md-3">
+        <div class="card shadow-sm" style="border-radius:15px;">
+            <div class="card-body text-center">
+                <h5 style="color:#344628;">Create User</h5>
+                <p class="text-muted">Add new system users</p>
+                <a class="btn w-100 text-white" style="background:#344628;"
+                   asp-controller="HR" asp-action="CreateUser">
+                    Open
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Users -->
+    <div class="col-md-3">
+        <div class="card shadow-sm" style="border-radius:15px;">
+            <div class="card-body text-center">
+                <h5 style="color:#344628;">Manage Users</h5>
+                <p class="text-muted">View, edit or delete users</p>
+                <a class="btn w-100 text-white" style="background:#344628;"
+                   asp-controller="HR" asp-action="ManageUsers">
+                    Open
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Claims Overview -->
+    <div class="col-md-3">
+        <div class="card shadow-sm" style="border-radius:15px;">
+            <div class="card-body text-center">
+                <h5 style="color:#344628;">Claims Overview</h5>
+                <p class="text-muted">See all lecturer claims</p>
+                <a class="btn w-100 text-white" style="background:#344628;"
+                   asp-controller="Claims" asp-action="HRClaims">
+                    Open
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="col-md-3">
+        <div class="card shadow-sm" style="border-radius:15px;">
+            <div class="card-body text-center">
+                <h5 style="color:#344628;">Reports</h5>
+                <p class="text-muted">Download statistics & logs</p>
+                <a class="btn w-100 text-white" style="background:#344628;"
+                   asp-controller="HR" asp-action="Reports">
+                    Open
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

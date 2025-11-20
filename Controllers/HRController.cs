@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Mvc;
 using ST10448420_CMCsystem.Data;
+using ST10448420_CMCsystem.Helpers;
 using ST10448420_CMCsystem.Models;
 using ST10448420_CMCsystem.Models.ViewModels;
-using ST10448420_CMCsystem.Helpers;
 
 namespace ST10448420_CMCsystem.Controllers
 {
@@ -115,7 +117,7 @@ namespace ST10448420_CMCsystem.Controllers
 
         //this is a helper method to get user by role and id
         private object GetUserByRole(string role, string id)
-        {
+        {//is this neccessay? --> yes, it is used in multiple methods below to get the user based on their role and id
             return role switch
             {
                 "Lecturer" => _db.Lecturer.FirstOrDefault(x => x.LecturerID == id),
@@ -257,5 +259,59 @@ namespace ST10448420_CMCsystem.Controllers
             _db.SaveChanges();
             return RedirectToAction("ManageUsers");
         }
+
+        [HttpGet]
+        public IActionResult Reports()
+        {//a method that generates reports for HR users,using a view model to pass the data to the view
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
+            var vm = new ReportsViewModel
+            {
+                Pending = _db.Claims.Count(c => c.ClaimStatus == "Pending"),
+                ReReview = _db.Claims.Count(c => c.ClaimStatus == "Approved by Programme Coordinator"),
+                Approved = _db.Claims.Count(c => c.ClaimStatus == "Approved by Academic Manager"),
+                Rejected = _db.Claims.Count(c => c.ClaimStatus.Contains("Rejected"))
+            };
+
+            return View("~/Views/HR/Reports.cshtml", vm);
+        }
+        //we are gonna use itextsharp for pdf generation in the reports section in the future
+        [HttpGet]
+        public IActionResult DownloadReport()
+        {
+            if (!IsHR())
+                return RedirectToAction("Login", "Account");
+
+            var vm = new ReportsViewModel
+            {
+                Pending = _db.Claims.Count(c => c.ClaimStatus == "Pending"),
+                ReReview = _db.Claims.Count(c => c.ClaimStatus == "Approved by Programme Coordinator"),
+                Approved = _db.Claims.Count(c => c.ClaimStatus == "Approved by Academic Manager"),
+                Rejected = _db.Claims.Count(c => c.ClaimStatus.Contains("Rejected")),
+                GeneratedOn = DateTime.Now
+            };
+
+            using (var ms = new MemoryStream())
+            {
+                var doc = new iTextSharp.text.Document();
+                PdfWriter.GetInstance(doc, ms);
+                doc.Open();
+
+                doc.Add(new Paragraph("CMC System – HR Claims Report"));
+                doc.Add(new Paragraph("-----------------------------------------"));
+                doc.Add(new Paragraph($"Generated On: {vm.GeneratedOn}"));
+                doc.Add(new Paragraph(""));
+                doc.Add(new Paragraph($"Pending Claims: {vm.Pending}"));
+                doc.Add(new Paragraph($"Up for Re-Review (PC Approved): {vm.ReReview}"));
+                doc.Add(new Paragraph($"Approved by Academic Manager: {vm.Approved}"));
+                doc.Add(new Paragraph($"Rejected Claims: {vm.Rejected}"));
+
+                doc.Close();
+
+                return File(ms.ToArray(), "application/pdf", "HR_Claims_Report.pdf");
+            }
+        }
+
     }
 }

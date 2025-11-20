@@ -67,6 +67,10 @@
             "Moq": {
               "target": "Package",
               "version": "[4.20.72, )"
+            },
+            "iTextSharp.LGPLv2.Core": {
+              "target": "Package",
+              "version": "[3.7.9, )"
             }
           },
           "imports": [
